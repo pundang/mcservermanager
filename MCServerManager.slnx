@@ -1,0 +1,11 @@
+﻿<Solution>
+  <Project Path="MCServerManager.Android/MCServerManager.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="MCServerManager.Browser/MCServerManager.Browser.csproj" />
+  <Project Path="MCServerManager.Desktop/MCServerManager.Desktop.csproj" />
+  <Project Path="MCServerManager.iOS/MCServerManager.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="MCServerManager/MCServerManager.csproj" />
+</Solution>
