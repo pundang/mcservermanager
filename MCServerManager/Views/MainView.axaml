@@ -1,16 +1,150 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:vm="using:MCServerManager.ViewModels"
-                mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-                x:Class="MCServerManager.Views.MainView"
-                x:DataType="vm:MainViewModel">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:MCServerManager.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             x:Class="MCServerManager.Views.MainView"
+             x:DataType="vm:MainViewModel">
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
-to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <UserControl.Resources>
+        <!-- home_regular will be used later -->
+        <StreamGeometry x:Key="home_regular">M21.6062 5.85517C23.0048 4.71494 24.9952 4.71494 26.3938 5.85517L39.5688 16.5966C40.4736 17.3342 41 18.4492 41 19.628V39.1134C41 41.2599 39.2875 43 37.175 43H32.075C29.9625 43 28.25 41.2599 28.25 39.1134V29.7492C28.25 29.0337 27.6792 28.4536 26.975 28.4536H21.025C20.3208 28.4536 19.75 29.0337 19.75 29.7492V39.1134C19.75 41.2599 18.0375 43 15.925 43H10.825C8.71251 43 7 41.2599 7 39.1134V19.628C7 18.4493 7.52645 17.3342 8.43124 16.5966L21.6062 5.85517ZM24.7979 7.87612C24.3317 7.49604 23.6683 7.49604 23.2021 7.87612L10.0271 18.6175C9.72548 18.8634 9.55 19.2351 9.55 19.628V39.1134C9.55 39.8289 10.1208 40.4089 10.825 40.4089H15.925C16.6292 40.4089 17.2 39.8289 17.2 39.1134V29.7492C17.2 27.6027 18.9125 25.8626 21.025 25.8626H26.975C29.0875 25.8626 30.8 27.6027 30.8 29.7492V39.1134C30.8 39.8289 31.3708 40.4089 32.075 40.4089H37.175C37.8792 40.4089 38.45 39.8289 38.45 39.1134V19.628C38.45 19.2351 38.2745 18.8634 37.9729 18.6175L24.7979 7.87612Z</StreamGeometry>
+        <StreamGeometry x:Key="play_regular">M13.7501344,8.41212026 L38.1671892,21.1169293 C39.7594652,21.9454306 40.3786269,23.9078584 39.5501255,25.5001344 C39.2420737,26.0921715 38.7592263,26.5750189 38.1671892,26.8830707 L13.7501344,39.5878797 C12.1578584,40.4163811 10.1954306,39.7972194 9.36692926,38.2049434 C9.12586301,37.7416442 9,37.2270724 9,36.704809 L9,11.295191 C9,9.50026556 10.4550746,8.045191 12.25,8.045191 C12.6976544,8.045191 13.1396577,8.13766178 13.5485655,8.31589049 L13.7501344,8.41212026 Z M12.5961849,10.629867 L12.4856981,10.5831892 C12.4099075,10.5581 12.3303482,10.545191 12.25,10.545191 C11.8357864,10.545191 11.5,10.8809774 11.5,11.295191 L11.5,36.704809 C11.5,36.8253313 11.5290453,36.9440787 11.584676,37.0509939 C11.7758686,37.4184422 12.2287365,37.5613256 12.5961849,37.370133 L37.0132397,24.665324 C37.1498636,24.5942351 37.2612899,24.4828088 37.3323788,24.3461849 C37.5235714,23.9787365 37.380688,23.5258686 37.0132397,23.334676 L12.5961849,10.629867 Z</StreamGeometry>
+        <StreamGeometry x:Key="stop_regular">M19.25 4.5C19.3881 4.5 19.5 4.61193 19.5 4.75V19.25C19.5 19.3881 19.3881 19.5 19.25 19.5H4.75C4.61193 19.5 4.5 19.3881 4.5 19.25V4.75C4.5 4.61193 4.61193 4.5 4.75 4.5H19.25ZM4.75 3C3.7835 3 3 3.7835 3 4.75V19.25C3 20.2165 3.7835 21 4.75 21H19.25C20.2165 21 21 20.2165 21 19.25V4.75C21 3.7835 20.2165 3 19.25 3H4.75Z</StreamGeometry>
+    </UserControl.Resources>
+
+    <DockPanel LastChildFill="True">
+        <!-- Sidebar -->
+        <Grid Margin="8" RowDefinitions="Auto,*,Auto" Background="{DynamicResource SystemRegionColor}">
+            <!-- <StackPanel HorizontalAlignment="Left">
+            <Button Classes="home-button" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <PathIcon Data="{StaticResource home_regular}" Foreground="White" Width="16" Height="16" />
+            </Button>
+            </StackPanel> -->
+
+            <!-- Tab list -->
+            <StackPanel Grid.Row="1" Spacing="4">
+                <RadioButton x:Name="PlayersTab" Classes="sidebar-tab" GroupName="Tabs"
+                             Content="Players" IsChecked="True" />
+                <RadioButton x:Name="ConsoleTab" Classes="sidebar-tab" GroupName="Tabs"
+                             Content="Console" />
+                <RadioButton x:Name="OptionsTab" Classes="sidebar-tab" GroupName="Tabs"
+                             Content="Options" />
+            </StackPanel>
+
+            <!-- Start | Stop button -->
+            <Button Grid.Row="2" Classes="toggle-start-btn" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                    Command="{Binding ToggleRunningCommand}"
+                    Classes.start-btn="{Binding !IsRunning}"
+                    Classes.stop-btn="{Binding IsRunning}">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <!-- Start | Stop icons -->
+                    <PathIcon Data="{StaticResource play_regular}" Width="12" Height="12" IsVisible="{Binding !IsRunning}" VerticalAlignment="Center" />
+                    <PathIcon Data="{StaticResource stop_regular}" Width="12" Height="12" IsVisible="{Binding IsRunning}" VerticalAlignment="Center" />
+
+                    <!-- Status Text -->
+                    <TextBlock Text="{Binding ServerInfo.Status}" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- Content area -->
+        <Panel>
+            <DockPanel IsVisible="{Binding #PlayersTab.IsChecked}">
+                <TextBlock DockPanel.Dock="Top" Text="Players" FontSize="20" FontWeight="SemiBold" />
+                <Border DockPanel.Dock="Top" Height="1" Background="Gray" Margin="0,8,0,12" />
+                <TextBlock Text="Players content goes here." />
+            </DockPanel>
+
+            <DockPanel IsVisible="{Binding #ConsoleTab.IsChecked}">
+                <TextBlock DockPanel.Dock="Top" Text="Console" FontSize="20" FontWeight="SemiBold" />
+                <Border DockPanel.Dock="Top" Height="1" Background="Gray" Margin="0,8,0,12" />
+                <TextBlock Text="Console content goes here." />
+            </DockPanel>
+
+            <DockPanel IsVisible="{Binding #OptionsTab.IsChecked}">
+                <TextBlock DockPanel.Dock="Top" Text="Options" FontSize="20" FontWeight="SemiBold" />
+                <Border DockPanel.Dock="Top" Height="1" Background="Gray" Margin="0,8,0,12" />
+                <TextBlock Text="Options content goes here." />
+            </DockPanel>
+        </Panel>
+    </DockPanel>
+
+    <UserControl.Styles>
+        <!-- Home button -->
+        <Style Selector="Button.home-button">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <!-- Sidebar buttons -->
+        <Style Selector="RadioButton.sidebar-tab">
+            <Setter Property="Padding" Value="15,8" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="FontWeight" Value="Light" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="PART_Bg"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="RadioButton.sidebar-tab:pointerover /template/ Border#PART_Bg">
+            <Setter Property="Background" Value="{DynamicResource SystemControlTransientBackgroundBrush}" />
+        </Style>
+
+        <Style Selector="RadioButton.sidebar-tab:checked /template/ Border#PART_Bg">
+            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAccentBrush}" />
+        </Style>
+
+        <Style Selector="RadioButton.sidebar-tab:checked">
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="RadioButton.sidebar-tab:checked">
+            <Setter Property="FontWeight" Value="Normal" />
+        </Style>
+
+        <!-- Start | Stop button styles -->
+        <Style Selector="Button.toggle-start-btn">
+            <Setter Property="MinWidth" Value="120" />
+            <Setter Property="Padding" Value="0,10" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <!-- Override default pointover event -->
+        <Style Selector="Button.toggle-start-btn:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{Binding $parent[Button].Background}" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="Button.start-btn">
+            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAccentBrush}" />
+
+            <Style Selector="^:pressed /template/ ContentPresenter">
+                <Setter Property="Background" Value="#71a144" />
+            </Style>
+        </Style>
+
+        <Style Selector="Button.stop-btn">
+            <Setter Property="Background" Value="#c55454" />
+
+            <Style Selector="^:pressed /template/ ContentPresenter">
+                <Setter Property="Background" Value="#c55d5d" />
+            </Style>
+        </Style>
+    </UserControl.Styles>
 </UserControl>

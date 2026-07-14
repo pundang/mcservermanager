@@ -3,13 +3,18 @@
              xmlns:local="using:MCServerManager"
              x:Class="MCServerManager.App"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
         <local:ViewLocator/>
-    </Application.DataTemplates>    
+    </Application.DataTemplates>
 
     <Application.Styles>
-        <FluentTheme />
+        <FluentTheme>
+            <FluentTheme.Palettes>
+                <ColorPaletteResources x:Key="Light" Accent="#ff7cb549" AltHigh="White" AltLow="White" AltMedium="White" AltMediumHigh="White" AltMediumLow="White" BaseHigh="Black" BaseLow="#ff6c9e40" BaseMedium="#ff35671a" BaseMediumHigh="#ff114300" BaseMediumLow="#ff23550d" ChromeAltLow="#ff114300" ChromeBlackHigh="Black" ChromeBlackLow="#ff6c9e40" ChromeBlackMedium="#ff114300" ChromeBlackMediumLow="#ff35671a" ChromeDisabledHigh="#ff6c9e40" ChromeDisabledLow="#ff35671a" ChromeGray="#ff23550d" ChromeHigh="#ff6c9e40" ChromeLow="#ffc5ddaf" ChromeMedium="#ffb3d099" ChromeMediumLow="#ffc5ddaf" ChromeWhite="White" ListLow="#ffb3d099" ListMedium="#ff6c9e40" RegionColor="#ffefefef" />
+                <ColorPaletteResources x:Key="Dark" Accent="#ff64933b" AltHigh="Black" AltLow="Black" AltMedium="Black" AltMediumHigh="Black" AltMediumLow="Black" BaseHigh="White" BaseLow="#ff4c6f2d" BaseMedium="#ffa3b98f" BaseMediumHigh="#ffb9cca8" BaseMediumLow="#ff78945e" ChromeAltLow="#ffb9cca8" ChromeBlackHigh="Black" ChromeBlackLow="#ffb9cca8" ChromeBlackMedium="Black" ChromeBlackMediumLow="Black" ChromeDisabledHigh="#ff4c6f2d" ChromeDisabledLow="#ffa3b98f" ChromeGray="#ff8da777" ChromeHigh="#ff8da777" ChromeLow="#ff163509" ChromeMedium="#ff244312" ChromeMediumLow="#ff3f6024" ChromeWhite="White" ListLow="#ff244312" ListMedium="#ff4c6f2d" RegionColor="#ff141414" />
+            </FluentTheme.Palettes>
+        </FluentTheme>
     </Application.Styles>
 </Application>
