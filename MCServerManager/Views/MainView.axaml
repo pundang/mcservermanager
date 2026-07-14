@@ -42,14 +42,15 @@
             <Button Grid.Row="2" Classes="toggle-start-btn" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                     Command="{Binding ToggleRunningCommand}"
                     Classes.start-btn="{Binding !IsRunning}"
-                    Classes.stop-btn="{Binding IsRunning}">
+                    Classes.stop-btn="{Binding IsRunning}"
+                    IsEnabled="{Binding ToggleButtonEnabled}">
                 <StackPanel Orientation="Horizontal" Spacing="4">
                     <!-- Start | Stop icons -->
                     <PathIcon Data="{StaticResource play_regular}" Width="12" Height="12" IsVisible="{Binding !IsRunning}" VerticalAlignment="Center" />
                     <PathIcon Data="{StaticResource stop_regular}" Width="12" Height="12" IsVisible="{Binding IsRunning}" VerticalAlignment="Center" />
 
                     <!-- Status Text -->
-                    <TextBlock Text="{Binding ServerInfo.Status}" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding ToggleButtonText}" VerticalAlignment="Center" />
                 </StackPanel>
             </Button>
         </Grid>

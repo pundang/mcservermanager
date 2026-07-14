@@ -21,6 +21,12 @@ public partial class MainViewModel : ObservableObject
         ServerStatus.Stopping => "Stopping...",
         _ => "Start"
     };
+    public bool ToggleButtonEnabled => ServerInfo.Status switch
+    {
+        ServerStatus.Stopped or ServerStatus.Running => true,
+        ServerStatus.Starting or ServerStatus.Stopping => false,
+        _ => false // We shouldn't reach this point
+    };
 
     public MainViewModel(IServerProcessService processService)
     {
