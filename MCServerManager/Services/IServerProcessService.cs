@@ -3,11 +3,14 @@ using System.Threading.Tasks;
 
 namespace MCServerManager.Services;
 
+/// <summary>
+/// Interface for the service that manages the Minecraft server process
+/// </summary>
 public interface IServerProcessService
 {
     ServerProcessInfo Info { get; }
 
-    event EventHandler<string>? OutputReceived; // raw stdout/stderr lines
+    event EventHandler<string>? OutputReceived; // Raw stdout/stderr lines
     event EventHandler<ServerStatus>? StatusChanged;
 
     Task StartAsync(string workingDirectory, string javaArgs = "-Xmx2G -jar server.jar nogui");

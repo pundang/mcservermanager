@@ -5,6 +5,11 @@ using Avalonia.Threading;
 
 namespace MCServerManager.Services;
 
+/// <summary>
+/// Launches and supervises the Minecraft server as a child process, piping
+/// stdin/stdout for command execution and log capture, and polling basic
+/// resource stats (uptime, memory) on a timer while running.
+/// </summary>
 public class ServerProcessService : IServerProcessService, IDisposable
 {
     private Process? _process;
@@ -21,6 +26,9 @@ public class ServerProcessService : IServerProcessService, IDisposable
         _statsTimer.Tick += (_, _) => UpdateStats();
     }
 
+    /// <summary>
+    /// Starts the server by executing a command
+    /// </summary>
     public Task StartAsync(string workingDirectory, string javaArgs = "-Xmx2G -jar server.jar nogui")
     {
         if (_process is { HasExited: false })
@@ -44,6 +52,7 @@ public class ServerProcessService : IServerProcessService, IDisposable
             EnableRaisingEvents = true
         };
 
+        // Pipe stdin and stderr to the event handler
         _process.OutputDataReceived += (_, e) => { if (e.Data is not null) OutputReceived?.Invoke(this, e.Data); };
         _process.ErrorDataReceived += (_, e) => { if (e.Data is not null) OutputReceived?.Invoke(this, e.Data); };
         _process.Exited += OnProcessExited;
@@ -60,6 +69,10 @@ public class ServerProcessService : IServerProcessService, IDisposable
         return Task.CompletedTask;
     }
 
+    /// <summary>
+    /// Tries to stop the server through stdin
+    /// If after 30s the server isn't closed it kills the server process
+    /// </summary>
     public async Task StopAsync(TimeSpan? gracefulTimeout = null)
     {
         if (_process is null || _process.HasExited) return;
@@ -74,6 +87,9 @@ public class ServerProcessService : IServerProcessService, IDisposable
             _process.Kill(entireProcessTree: true);
     }
 
+    /// <summary>
+    /// Restarts the server process
+    /// </summary>
     public async Task RestartAsync()
     {
         var workingDir = _process?.StartInfo.WorkingDirectory ?? "";
@@ -81,6 +97,9 @@ public class ServerProcessService : IServerProcessService, IDisposable
         await StartAsync(workingDir);
     }
 
+    /// <summary>
+    /// Send a command through stdin that the server will receive
+    /// </summary>
     public Task SendCommandAsync(string command)
     {
         if (_process is null || _process.HasExited)
@@ -89,12 +108,18 @@ public class ServerProcessService : IServerProcessService, IDisposable
         return _process.StandardInput.WriteLineAsync(command);
     }
 
+    /// <summary>
+    /// Event handler for the server process exit
+    /// </summary>
     private void OnProcessExited(object? sender, EventArgs e)
     {
         _statsTimer.Stop();
         SetStatus(_process?.ExitCode == 0 ? ServerStatus.Stopped : ServerStatus.Crashed);
     }
 
+    /// <summary>
+    /// Update the stats for the server process uptime and memory
+    /// </summary>
     private void UpdateStats()
     {
         if (_process is null || _process.HasExited) return;
@@ -104,6 +129,10 @@ public class ServerProcessService : IServerProcessService, IDisposable
         Info.MemoryUsageMb = _process.WorkingSet64 / 1024 / 1024;
     }
 
+    /// <summary>
+    /// Sets the status for the server process
+    /// Stopped | Starting | Running | Stopping | Crashed
+    /// </summary>
     private void SetStatus(ServerStatus status)
     {
         Info.Status = status;

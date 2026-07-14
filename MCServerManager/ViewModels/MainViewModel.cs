@@ -6,8 +6,12 @@ using MCServerManager.Services;
 
 namespace MCServerManager.ViewModels;
 
+/// <summary>
+/// Main ViewModel for managing the server configuration and runtime
+/// </summary>
 public partial class MainViewModel : ObservableObject
 {
+    // Service for managing the server process
     private readonly IServerProcessService _processService;
 
     public ServerProcessInfo ServerInfo => _processService.Info;
@@ -29,6 +33,7 @@ public partial class MainViewModel : ObservableObject
 
     public MainViewModel(IServerProcessService processService)
     {
+        // Send signals to UI when the process changes status
         _processService = processService;
         _processService.StatusChanged += (_, _) =>
         {
@@ -37,6 +42,9 @@ public partial class MainViewModel : ObservableObject
         };
     }
 
+    /// <summary>
+    /// Runs and shuts off the server
+    /// </summary>
     [RelayCommand]
     private async Task ToggleRunningAsync()
     {
