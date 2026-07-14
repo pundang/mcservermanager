@@ -7,6 +7,8 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MCServerManager.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="MCServerManager">
-        <views:MainView />
+        Title="MCServerManager"
+        Width="1280" Height="720"
+        MinWidth="640" MinHeight="360">
+    <views:MainView />
 </Window>
