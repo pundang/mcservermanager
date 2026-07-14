@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 
@@ -81,10 +82,16 @@ public class ServerProcessService : IServerProcessService, IDisposable
         await SendCommandAsync("stop");
 
         var timeout = gracefulTimeout ?? TimeSpan.FromSeconds(30);
-        var exited = _process.WaitForExit((int)timeout.TotalMilliseconds);
+        using var cts = new CancellationTokenSource(timeout);
 
-        if (!exited)
+        try
+        {
+            await _process.WaitForExitAsync(cts.Token);
+        }
+        catch (OperationCanceledException)
+        {
             _process.Kill(entireProcessTree: true);
+        }
     }
 
     /// <summary>
