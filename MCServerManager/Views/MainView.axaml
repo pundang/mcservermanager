@@ -29,12 +29,12 @@
 
             <!-- Tab list -->
             <StackPanel Grid.Row="1" Spacing="4">
-                <RadioButton x:Name="PlayersTab" Classes="sidebar-tab" GroupName="Tabs"
-                             Content="Players" IsChecked="True" />
-                <RadioButton x:Name="ConsoleTab" Classes="sidebar-tab" GroupName="Tabs"
-                             Content="Console" />
-                <RadioButton x:Name="OptionsTab" Classes="sidebar-tab" GroupName="Tabs"
-                             Content="Options" />
+                <RadioButton Classes="sidebar-tab" GroupName="Tabs"
+                             Content="Players" Command="{Binding SelectTabCommand}" CommandParameter="Players" IsChecked="True" />
+                <RadioButton Classes="sidebar-tab" GroupName="Tabs"
+                             Content="Console" Command="{Binding SelectTabCommand}" CommandParameter="Console" />
+                <RadioButton Classes="sidebar-tab" GroupName="Tabs"
+                             Content="Options" Command="{Binding SelectTabCommand}" CommandParameter="Options" />
             </StackPanel>
 
             <!-- Start | Stop button -->
@@ -54,25 +54,7 @@
         </Grid>
 
         <!-- Content area -->
-        <Panel>
-            <DockPanel IsVisible="{Binding #PlayersTab.IsChecked}">
-                <TextBlock DockPanel.Dock="Top" Text="Players" FontSize="20" FontWeight="SemiBold" />
-                <Border DockPanel.Dock="Top" Height="1" Background="Gray" Margin="0,8,0,12" />
-                <TextBlock Text="Players content goes here." />
-            </DockPanel>
-
-            <DockPanel IsVisible="{Binding #ConsoleTab.IsChecked}">
-                <TextBlock DockPanel.Dock="Top" Text="Console" FontSize="20" FontWeight="SemiBold" />
-                <Border DockPanel.Dock="Top" Height="1" Background="Gray" Margin="0,8,0,12" />
-                <TextBlock Text="Console content goes here." />
-            </DockPanel>
-
-            <DockPanel IsVisible="{Binding #OptionsTab.IsChecked}">
-                <TextBlock DockPanel.Dock="Top" Text="Options" FontSize="20" FontWeight="SemiBold" />
-                <Border DockPanel.Dock="Top" Height="1" Background="Gray" Margin="0,8,0,12" />
-                <TextBlock Text="Options content goes here." />
-            </DockPanel>
-        </Panel>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </DockPanel>
 
     <UserControl.Styles>

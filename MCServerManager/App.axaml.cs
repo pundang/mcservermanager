@@ -24,6 +24,7 @@ public partial class App : Application
 
         services.AddSingleton<IServerProcessService, ServerProcessService>();
         services.AddTransient<MainViewModel>();
+        services.AddSingleton<ConsoleViewModel>();
 
         Services = services.BuildServiceProvider();
 

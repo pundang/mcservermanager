@@ -1,8 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MCServerManager.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MCServerManager.ViewModels;
 
@@ -11,7 +13,10 @@ namespace MCServerManager.ViewModels;
 /// </summary>
 public partial class MainViewModel : ObservableObject
 {
-    // Service for managing the server process
+    private readonly IServiceProvider _provider;
+    [ObservableProperty]
+    private ViewModelBase currentViewModel;
+
     private readonly IServerProcessService _processService;
 
     public ServerProcessInfo ServerInfo => _processService.Info;
@@ -31,8 +36,11 @@ public partial class MainViewModel : ObservableObject
         _ => false // We shouldn't reach this point
     };
 
-    public MainViewModel(IServerProcessService processService)
+    public MainViewModel(IServiceProvider serviceProvider, IServerProcessService processService)
     {
+        _provider = serviceProvider;
+        currentViewModel = _provider.GetRequiredService<ConsoleViewModel>();
+
         // Send signals to UI when the process changes status
         _processService = processService;
         _processService.StatusChanged += (_, _) =>
@@ -41,6 +49,17 @@ public partial class MainViewModel : ObservableObject
             OnPropertyChanged(nameof(ToggleButtonText));
         };
     }
+
+    /// <summary>
+    /// Tab switch function
+    /// </summary>
+    [RelayCommand]
+    private void SelectTab(string tab) =>
+    CurrentViewModel = tab switch
+    {
+        "Console" => _provider.GetRequiredService<ConsoleViewModel>(),
+        _ => CurrentViewModel
+    };
 
     /// <summary>
     /// Runs and shuts off the server
