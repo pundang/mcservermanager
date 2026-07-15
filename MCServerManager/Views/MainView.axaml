@@ -53,7 +53,7 @@
         </Grid>
 
         <!-- Content area -->
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <ContentControl Content="{Binding CurrentViewModel}" />
     </DockPanel>
 
     <UserControl.Styles>
