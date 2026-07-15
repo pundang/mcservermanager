@@ -21,6 +21,8 @@
             <Button Grid.Column="1" Click="Button_Click">
                 <PathIcon Data="{StaticResource play_regular}"/>
             </Button>
+
+            <TextBlock>ASDIKSDJKee</TextBlock>
         </Grid>
     </Grid>
 </UserControl>
