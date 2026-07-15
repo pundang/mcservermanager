@@ -10,7 +10,17 @@
         <vm:ConsoleViewModel />
     </Design.DataContext>
 
-    <ScrollViewer>
-        <ItemsControl ItemsSource="{Binding ConsoleOutputLines}" />
-    </ScrollViewer>
+    <Grid RowDefinitions="*,Auto" RowSpacing="4">
+        <ScrollViewer x:Name="LogScrollList" Grid.Row="0" ScrollChanged="LogScrollList_ScrollChanged">
+            <ItemsControl ItemsSource="{Binding ConsoleOutputLines}" />
+        </ScrollViewer>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8" HorizontalAlignment="Stretch">
+            <TextBox x:Name="CmdBox" Grid.Column="0" KeyDown="CmdBox_KeyDown"/>
+
+            <Button Grid.Column="1" Click="Button_Click">
+                <PathIcon Data="{StaticResource play_regular}"/>
+            </Button>
+        </Grid>
+    </Grid>
 </UserControl>
