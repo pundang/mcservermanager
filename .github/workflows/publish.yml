@@ -19,11 +19,11 @@ jobs:
 
       - name: Publish app
         run: >
-          dotnet publish src/YourApp/YourApp.csproj
+          dotnet publish
           -c Release
           -r win-x64
           --self-contained true
-          -p:PublishSingleFile=true
+          -p:PublishSingleFile=false
           -p:IncludeNativeLibrariesForSelfExtract=true
           -o publish/win-x64
 
