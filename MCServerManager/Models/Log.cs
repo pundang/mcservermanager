@@ -1,5 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
+namespace MCServerManager.Models;
+
 public partial class Log : ObservableObject
 {
     [ObservableProperty]

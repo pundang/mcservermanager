@@ -1,6 +1,8 @@
 using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 
+namespace MCServerManager.Models;
+
 public partial class ServerProcessInfo : ObservableObject
 {
     [ObservableProperty]

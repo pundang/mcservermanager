@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MCServerManager.Models;
 using MCServerManager.Services;
 using Microsoft.Extensions.DependencyInjection;
 

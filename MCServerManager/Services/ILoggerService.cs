@@ -1,4 +1,5 @@
 using System;
+using MCServerManager.Models;
 
 namespace MCServerManager.Services;
 
