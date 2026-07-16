@@ -10,7 +10,7 @@
         <vm:ConsoleViewModel />
     </Design.DataContext>
 
-    <Grid RowDefinitions="*,Auto" RowSpacing="4" Height="300">
+    <Grid RowDefinitions="*,Auto" RowSpacing="4">
         <ScrollViewer x:Name="LogScrollList" Grid.Row="0" ScrollChanged="LogScrollList_ScrollChanged">
             <ItemsControl ItemsSource="{Binding ConsoleOutputLines}" />
         </ScrollViewer>
