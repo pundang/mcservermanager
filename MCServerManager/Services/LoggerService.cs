@@ -7,7 +7,7 @@ namespace MCServerManager.Services;
 /// <summary>
 /// Interface for the service that manages the logs of the server
 /// </summary>
-public partial class LoggerService : ILoggerService, IDisposable
+public partial class LoggerService : ILoggerService
 {
     public event EventHandler<Log>? LogOutput;
 
@@ -44,6 +44,4 @@ public partial class LoggerService : ILoggerService, IDisposable
 
         LogOutput?.Invoke(this, log);
     }
-
-    public void Dispose() { }
 }
