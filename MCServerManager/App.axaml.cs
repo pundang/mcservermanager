@@ -23,6 +23,7 @@ public partial class App : Application
         var services = new ServiceCollection();
 
         services.AddSingleton<IServerProcessService, ServerProcessService>();
+        services.AddSingleton<ILoggerService, LoggerService>();
         services.AddTransient<MainViewModel>();
         services.AddSingleton<ConsoleViewModel>();
 
