@@ -25,4 +25,4 @@ Cross-platform application for setting up and managing a Minecraft server.
 
 ## License
 
-This project is licensed under the MIT license, check /LICENSE for more information
+This project is licensed under the BSD-2-Clause license, check /LICENSE for more information
