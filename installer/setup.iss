@@ -14,8 +14,8 @@ ArchitecturesInstallIn64BitMode=x64
 Source: "..\publish\win-x64\*"; DestDir: "{app}"; Flags: recursesubdirs
 
 [Icons]
-Name: "{group}\MCServerManager"; Filename: "{app}\MCServerManager.exe"
-Name: "{autodesktop}\MCServerManager"; Filename: "{app}\MCServerManager.exe"
+Name: "{group}\MCServerManager"; Filename: "{app}\MCServerManager.Desktop.exe"
+Name: "{autodesktop}\MCServerManager"; Filename: "{app}\MCServerManager.Desktop.exe"
 
 [Run]
-Filename: "{app}\MCServerManager.exe"; Description: "Launch MCServerManager"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\MCServerManager.Desktop.exe"; Description: "Launch MCServerManager"; Flags: nowait postinstall skipifsilent
