@@ -5,13 +5,13 @@ namespace MCServerManager.Models;
 public partial class Log : ObservableObject
 {
     [ObservableProperty]
-    private string rawContent = "";
+    public partial string RawContent { get; set; } = "";
 
     [ObservableProperty]
-    private LogType type = LogType.Unknown;
+    public partial LogType Type { get; set; } = LogType.Unknown;
 
     [ObservableProperty]
-    private string message = "";
+    public partial string Message { get; set; } = "";
 }
 
 public enum LogType { Unknown, Info, Warning, Error, Debug, Trace, Fatal }

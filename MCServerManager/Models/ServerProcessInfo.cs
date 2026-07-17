@@ -6,19 +6,19 @@ namespace MCServerManager.Models;
 public partial class ServerProcessInfo : ObservableObject
 {
     [ObservableProperty]
-    private ServerStatus status = ServerStatus.Stopped;
+    public partial ServerStatus Status { get; set; } = ServerStatus.Stopped;
 
     [ObservableProperty]
-    private int processId;
+    public partial int ProcessId { get; set; }
 
     [ObservableProperty]
-    private TimeSpan uptime;
+    public partial TimeSpan Uptime { get; set; }
 
     [ObservableProperty]
-    private long memoryUsageMb;
+    public partial long MemoryUsageMb { get; set; }
 
     [ObservableProperty]
-    private DateTime? startedAt;
+    public partial DateTime? StartedAt { get; set; }
 }
 
 public enum ServerStatus { Stopped, Starting, Running, Stopping, Crashed }
