@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:MCServerManager.ViewModels"
+             xmlns:views="using:MCServerManager.Views"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             x:Class="MCServerManager.Views.SoftwareView"
+             x:DataType="vm:SoftwareViewModel">
+    <Design.DataContext>
+        <vm:SoftwareViewModel />
+    </Design.DataContext>
+
+    <ListBox ItemsSource="{Binding Versions}" Background="Transparent">
+        <ListBox.Styles>
+            <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+            <Style Selector="ListBoxItem:pressed /template/ ContentPresenter">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+            <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+            <Style Selector="ListBoxItem:selected:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+        </ListBox.Styles>
+
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <UniformGrid Columns="3" />
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+
+        <ListBox.ItemTemplate>
+            <DataTemplate DataType="vm:VersionItemViewModel">
+                <views:VersionCard />
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</UserControl>

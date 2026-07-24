@@ -15,10 +15,11 @@ namespace MCServerManager.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly IServiceProvider _provider;
+    private readonly IServerProcessService _processService;
+    private readonly IStorageManagerService _storageManagerService;
+
     [ObservableProperty]
     private ViewModelBase currentViewModel;
-
-    private readonly IServerProcessService _processService;
 
     public ServerProcessInfo ServerInfo => _processService.Info;
 
@@ -37,13 +38,15 @@ public partial class MainViewModel : ObservableObject
         _ => false // We shouldn't reach this point
     };
 
-    public MainViewModel(IServiceProvider serviceProvider, IServerProcessService processService)
+    public MainViewModel(IServiceProvider serviceProvider, IServerProcessService processService, IStorageManagerService storageManagerService)
     {
         _provider = serviceProvider;
+        _processService = processService;
+        _storageManagerService = storageManagerService;
+
         currentViewModel = _provider.GetRequiredService<ConsoleViewModel>();
 
         // Send signals to UI when the process changes status
-        _processService = processService;
         _processService.StatusChanged += (_, _) =>
         {
             OnPropertyChanged(nameof(IsRunning));
@@ -59,6 +62,7 @@ public partial class MainViewModel : ObservableObject
     CurrentViewModel = tab switch
     {
         "Console" => _provider.GetRequiredService<ConsoleViewModel>(),
+        "Software" => _provider.GetRequiredService<SoftwareViewModel>(),
         _ => CurrentViewModel
     };
 
@@ -71,6 +75,6 @@ public partial class MainViewModel : ObservableObject
         if (IsRunning)
             await _processService.StopAsync();
         else
-            await _processService.StartAsync(Directory.GetCurrentDirectory() + "/server/"); // TODO: FIX HARDCODED PATH
+            await _processService.StartAsync(_storageManagerService.ServerDirectory);
     }
 }

@@ -34,6 +34,8 @@
                              Content="Console" Command="{Binding SelectTabCommand}" CommandParameter="Console" />
                 <RadioButton Classes="sidebar-tab" GroupName="Tabs"
                              Content="Options" Command="{Binding SelectTabCommand}" CommandParameter="Options" />
+                <RadioButton Classes="sidebar-tab" GroupName="Tabs"
+                             Content="Software" Command="{Binding SelectTabCommand}" CommandParameter="Software" />
             </StackPanel>
 
             <!-- Start | Stop button -->

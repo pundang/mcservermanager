@@ -8,8 +8,7 @@ Cross-platform application for setting up and managing a Minecraft server.
 ## Notes
 
 * Players and options tab aren't working
-* For using the application you need to provide your own `server.jar`
-* Server path is hardcoded to `/server/`
+* Version manager UI may improve in the future, but for now it works fine
 
 ## Planned features
 
@@ -18,11 +17,11 @@ Cross-platform application for setting up and managing a Minecraft server.
 * [ ] Player management
 * [x] Console input / output
 * [ ] Settings management
-* [ ] Version downloader
+* [x] Version downloader
 * [ ] Plugin support
 * [ ] Mod support (maybe modpacks)
 * [ ] Server tunneling
 
 ## License
 
-This project is licensed under the BSD-2-Clause license, check /LICENSE for more information
+This project is licensed under the BSD-2-Clause license, check [LICENSE](/LICENSE) for more information

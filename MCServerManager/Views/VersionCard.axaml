@@ -1,0 +1,16 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MCServerManager.ViewModels"
+             x:Class="MCServerManager.Views.VersionCard"
+             x:DataType="vm:VersionItemViewModel">
+
+    <StackPanel Spacing="6">
+        <TextBlock Text="{Binding Version.Id}" FontSize="18" FontWeight="Bold" />
+
+        <TextBlock Text="{Binding Version.Type}" Foreground="Gray" />
+
+        <Button Content="Install"
+                Command="{Binding InstallVersionCommand}"
+                CommandParameter="{Binding Version.Id}" />
+    </StackPanel>
+</UserControl>

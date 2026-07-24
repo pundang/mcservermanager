@@ -9,6 +9,6 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="MCServerManager"
         Width="1280" Height="720"
-        MinWidth="640" MinHeight="360">
+        MinWidth="786" MinHeight="360">
     <views:MainView />
 </Window>
