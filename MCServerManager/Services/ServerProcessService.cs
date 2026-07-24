@@ -151,5 +151,6 @@ public class ServerProcessService : IServerProcessService, IDisposable
     {
         _statsTimer.Stop();
         _process?.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
