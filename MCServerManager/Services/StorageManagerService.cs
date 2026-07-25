@@ -55,4 +55,36 @@ public class StorageManagerService : IStorageManagerService
             File.Delete(temporaryPath);
         }
     }
+
+    public async Task<string> LoadFileAsStringAsync(string filePath, CancellationToken cancellationToken = default)
+    {
+        await using FileStream fs = new(
+            filePath,
+            FileMode.Open,
+            FileAccess.Read,
+            FileShare.Read,
+            RandomAccessBufferSize,
+            FileOptions.SequentialScan | FileOptions.Asynchronous
+        );
+        using StreamReader reader = new(fs);
+
+        return await reader.ReadToEndAsync(cancellationToken);
+    }
+
+    public async Task SaveFileAsStringAsync(string filePath, string content, CancellationToken cancellationToken = default)
+    {
+        await using FileStream fs = new(
+            filePath,
+            FileMode.Create,
+            FileAccess.Write,
+            FileShare.None,
+            RandomAccessBufferSize,
+            FileOptions.Asynchronous
+        );
+        using StreamWriter writer = new(fs);
+
+        await writer.WriteAsync(content.AsMemory(), cancellationToken);
+
+        return;
+    }
 }

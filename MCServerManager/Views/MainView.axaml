@@ -33,7 +33,7 @@
                 <RadioButton Classes="sidebar-tab" GroupName="Tabs"
                              Content="Console" Command="{Binding SelectTabCommand}" CommandParameter="Console" />
                 <RadioButton Classes="sidebar-tab" GroupName="Tabs"
-                             Content="Options" Command="{Binding SelectTabCommand}" CommandParameter="Options" />
+                             Content="Settings" Command="{Binding SelectTabCommand}" CommandParameter="Settings" />
                 <RadioButton Classes="sidebar-tab" GroupName="Tabs"
                              Content="Software" Command="{Binding SelectTabCommand}" CommandParameter="Software" />
             </StackPanel>

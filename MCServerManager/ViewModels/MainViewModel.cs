@@ -22,7 +22,6 @@ public partial class MainViewModel : ObservableObject
     private ViewModelBase currentViewModel;
 
     public ServerProcessInfo ServerInfo => _processService.Info;
-
     public bool IsRunning => ServerInfo.Status is ServerStatus.Running or ServerStatus.Starting;
     public string ToggleButtonText => ServerInfo.Status switch
     {
@@ -51,6 +50,7 @@ public partial class MainViewModel : ObservableObject
         {
             OnPropertyChanged(nameof(IsRunning));
             OnPropertyChanged(nameof(ToggleButtonText));
+            OnPropertyChanged(nameof(ToggleButtonEnabled));
         };
     }
 
@@ -62,6 +62,7 @@ public partial class MainViewModel : ObservableObject
     CurrentViewModel = tab switch
     {
         "Console" => _provider.GetRequiredService<ConsoleViewModel>(),
+        "Settings" => _provider.GetRequiredService<ServerSettingsViewModel>(),
         "Software" => _provider.GetRequiredService<SoftwareViewModel>(),
         _ => CurrentViewModel
     };
