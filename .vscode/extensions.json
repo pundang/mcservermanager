@@ -1,5 +1,6 @@
 {
   "recommendations": [
     "avaloniateam.vscode-avalonia",
+    "nromanov.dotnet-meteor",
   ]
 }
