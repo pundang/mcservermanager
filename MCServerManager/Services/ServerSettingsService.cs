@@ -51,12 +51,9 @@ public partial class ServerSettingsService : IServerSettingsService
 
     public async Task SaveSettings(List<ServerSetting> serverSettingsObject)
     {
-        string content = "";
-
-        foreach (ServerSetting setting in serverSettingsObject)
-        {
-            content += $"{setting.Key}={setting.Value}\n";
-        }
+        string content = string.Join("\n",
+            serverSettingsObject.Select(setting => $"{setting.Key}={setting.Value}")
+        ) + "\n";
 
         await _storageManagerService.SaveFileAsStringAsync(
             Path.Combine(_storageManagerService.ServerDirectory, "server.properties"),
