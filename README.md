@@ -16,7 +16,7 @@ Cross-platform application for setting up and managing a Minecraft server.
 * [ ] Dashboard (memory / cpu usage + charts for server data)
 * [ ] Player management
 * [x] Console input / output
-* [ ] Settings management
+* [x] Settings management
 * [x] Version downloader
 * [ ] Plugin support
 * [ ] Mod support (maybe modpacks)
