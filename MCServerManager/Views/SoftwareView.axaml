@@ -13,6 +13,9 @@
 
     <ListBox ItemsSource="{Binding Versions}" Background="Transparent">
         <ListBox.Styles>
+            <Style Selector="ListBoxItem">
+                <Setter Property="Padding" Value="0"/>
+            </Style>
             <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
                 <Setter Property="Background" Value="Transparent"/>
             </Style>
@@ -29,7 +32,7 @@
 
         <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
-                <UniformGrid Columns="3" />
+                <UniformGrid Columns="3" RowSpacing="16" ColumnSpacing="8" />
             </ItemsPanelTemplate>
         </ListBox.ItemsPanel>
 
