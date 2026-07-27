@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -19,7 +18,7 @@ public partial class MainViewModel : ObservableObject
     private readonly IStorageManagerService _storageManagerService;
 
     [ObservableProperty]
-    private ViewModelBase currentViewModel;
+    public partial ViewModelBase CurrentViewModel { get; set; }
 
     public ServerProcessInfo ServerInfo => _processService.Info;
     public bool IsRunning => ServerInfo.Status is ServerStatus.Running or ServerStatus.Starting;
@@ -42,8 +41,7 @@ public partial class MainViewModel : ObservableObject
         _provider = serviceProvider;
         _processService = processService;
         _storageManagerService = storageManagerService;
-
-        currentViewModel = _provider.GetRequiredService<ConsoleViewModel>();
+        CurrentViewModel = _provider.GetRequiredService<ConsoleViewModel>();
 
         // Send signals to UI when the process changes status
         _processService.StatusChanged += (_, _) =>

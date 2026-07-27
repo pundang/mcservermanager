@@ -12,21 +12,13 @@ namespace MCServerManager.Services;
 /// <summary>
 /// Interface for the service that manages the versions
 /// </summary>
-public partial class VersionManagerService : IVersionManagerService, IDisposable
+public partial class VersionManagerService(IStorageManagerService storageManagerService) : IVersionManagerService, IDisposable
 {
-    private readonly IStorageManagerService _storageManagerService;
+    private readonly IStorageManagerService _storageManagerService = storageManagerService;
     private readonly string _manifestUrl = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
-    private readonly HttpClient _httpClient;
+    private readonly HttpClient _httpClient = new();
 
-    public Manifest? VersionManifest { get; set; }
-
-    public VersionManagerService(IStorageManagerService storageManagerService)
-    {
-        _storageManagerService = storageManagerService;
-
-        _httpClient = new HttpClient();
-        VersionManifest = null;
-    }
+    public Manifest? VersionManifest { get; set; } = null;
 
     /// <summary>
     /// Fetch the manifest for a list of all the Minecraft versions

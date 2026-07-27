@@ -9,14 +9,9 @@ using MCServerManager.Models;
 
 namespace MCServerManager.Services;
 
-public partial class ServerSettingsService : IServerSettingsService
+public partial class ServerSettingsService(IStorageManagerService storageManagerService) : IServerSettingsService
 {
-    private readonly IStorageManagerService _storageManagerService;
-
-    public ServerSettingsService(IStorageManagerService storageManagerService)
-    {
-        _storageManagerService = storageManagerService;
-    }
+    private readonly IStorageManagerService _storageManagerService = storageManagerService;
 
     // key=value
     [GeneratedRegex(@"(?<key>.*)=(?<value>.*)")]
