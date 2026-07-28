@@ -11,35 +11,21 @@
         <vm:SoftwareViewModel />
     </Design.DataContext>
 
-    <ListBox ItemsSource="{Binding Versions}" Background="Transparent">
-        <ListBox.Styles>
-            <Style Selector="ListBoxItem">
-                <Setter Property="Padding" Value="0"/>
-            </Style>
-            <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
-                <Setter Property="Background" Value="Transparent"/>
-            </Style>
-            <Style Selector="ListBoxItem:pressed /template/ ContentPresenter">
-                <Setter Property="Background" Value="Transparent"/>
-            </Style>
-            <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
-                <Setter Property="Background" Value="Transparent"/>
-            </Style>
-            <Style Selector="ListBoxItem:selected:pointerover /template/ ContentPresenter">
-                <Setter Property="Background" Value="Transparent"/>
-            </Style>
-        </ListBox.Styles>
+    <Panel>
+        <ScrollViewer IsVisible="{Binding ManifestDownloaded}">
+            <ItemsRepeater ItemsSource="{Binding Versions}">
+                <ItemsRepeater.Layout>
+                    <UniformGridLayout MinItemWidth="300" MinItemHeight="110"
+                                       MinColumnSpacing="8" MinRowSpacing="16" />
+                </ItemsRepeater.Layout>
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate DataType="vm:VersionItemViewModel">
+                        <views:VersionCard />
+                    </DataTemplate>
+                </ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
+        </ScrollViewer>
 
-        <ListBox.ItemsPanel>
-            <ItemsPanelTemplate>
-                <UniformGrid Columns="3" RowSpacing="16" ColumnSpacing="8" />
-            </ItemsPanelTemplate>
-        </ListBox.ItemsPanel>
-
-        <ListBox.ItemTemplate>
-            <DataTemplate DataType="vm:VersionItemViewModel">
-                <views:VersionCard />
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+        <TextBlock IsVisible="{Binding !ManifestDownloaded}">Downloading version manifest...</TextBlock>
+    </Panel>
 </UserControl>

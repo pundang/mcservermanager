@@ -27,7 +27,7 @@ public partial class App : Application
         services.AddSingleton<IStorageManagerService, StorageManagerService>();
         services.AddSingleton<IVersionManagerService, VersionManagerService>();
         services.AddSingleton<IServerSettingsService, ServerSettingsService>();
-        services.AddTransient<SoftwareViewModel>();
+        services.AddSingleton<SoftwareViewModel>();
         services.AddTransient<ServerSettingsViewModel>();
         services.AddTransient<MainViewModel>();
         services.AddSingleton<ConsoleViewModel>();
