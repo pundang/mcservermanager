@@ -12,10 +12,10 @@ public class MinecraftVersionDownloads
 {
     // I think we won't be using client downloads, i'll leave it here just in case
     [JsonPropertyName("client")]
-    public DownloadEntry Client { get; set; } = new();
+    public DownloadEntry? Client { get; set; }
 
     [JsonPropertyName("server")]
-    public DownloadEntry Server { get; set; } = new();
+    public DownloadEntry? Server { get; set; }
 }
 
 public class DownloadEntry
@@ -24,7 +24,7 @@ public class DownloadEntry
     public string Sha1 { get; set; } = string.Empty;
 
     [JsonPropertyName("size")]
-    public long Size { get; set; }
+    public long Size { get; set; } = 0;
 
     [JsonPropertyName("url")]
     public string Url { get; set; } = string.Empty;

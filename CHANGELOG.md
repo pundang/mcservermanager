@@ -11,6 +11,7 @@
 * Optimized Console tab for faster rendering.
 * Optimized Settings tab for faster rendering.
 * Improved styling for Versions tab.
+* Fixed a crash when trying to download a version with no multiplayer.
 
 ## v0.1.0-alpha.3
 
