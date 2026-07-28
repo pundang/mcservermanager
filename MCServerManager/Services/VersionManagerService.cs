@@ -23,7 +23,7 @@ public partial class VersionManagerService(IStorageManagerService storageManager
     /// <summary>
     /// Fetch the manifest for a list of all the Minecraft versions
     /// </summary>
-    public async Task GetManifest()
+    public async Task DownloadManifest()
     {
         try
         {
@@ -38,12 +38,12 @@ public partial class VersionManagerService(IStorageManagerService storageManager
     /// <summary>
     /// Downloads the version data using the provided id
     /// </summary>
-    private async Task<MinecraftVersion?> GetManifestVersion(string versionId)
+    private async Task<MinecraftVersion?> DownloadVersionInfo(string versionId)
     {
         if (VersionManifest is null)
         {
             Debug.WriteLine("Getting manifest...");
-            await GetManifest();
+            await DownloadManifest();
         }
 
         VersionBase? version = VersionManifest?.Versions.Find(v => v.Id == versionId);
@@ -59,18 +59,18 @@ public partial class VersionManagerService(IStorageManagerService storageManager
     /// <summary>
     /// Downloads the version server binary
     /// </summary>
-    public async Task DownloadVersion(string versionId)
+    public async Task DownloadVersionBinary(string versionId)
     {
-        MinecraftVersion? minecraftVersion = await GetManifestVersion(versionId);
+        MinecraftVersion? minecraftVersion = await DownloadVersionInfo(versionId);
 
         if (minecraftVersion is null)
             return;
 
-        string url = minecraftVersion.Downloads.Server.Url;
+        MinecraftVersionDownloads versionDownloads = minecraftVersion.Downloads;
 
+        string url = versionDownloads.Server.Url;
         Stream downloadStream = await _httpClient.GetStreamAsync(url);
         await _storageManagerService.DownloadOrReplaceServerJarAsync(downloadStream);
-
     }
 
     public void Dispose()
