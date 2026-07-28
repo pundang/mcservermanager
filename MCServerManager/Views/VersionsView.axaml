@@ -12,18 +12,36 @@
     </Design.DataContext>
 
     <Panel>
-        <ScrollViewer IsVisible="{Binding ManifestDownloaded}">
-            <ItemsRepeater ItemsSource="{Binding Versions}">
-                <ItemsRepeater.Layout>
-                    <UniformGridLayout MaximumRowsOrColumns="5" MinRowSpacing="18" MinColumnSpacing="12" ItemsJustification="SpaceAround" ItemsStretch="Fill" />
-                </ItemsRepeater.Layout>
-                <ItemsRepeater.ItemTemplate>
-                    <DataTemplate DataType="vm:VersionItemViewModel">
-                        <views:VersionCard />
-                    </DataTemplate>
-                </ItemsRepeater.ItemTemplate>
-            </ItemsRepeater>
-        </ScrollViewer>
+        <Grid RowDefinitions="Auto,*" RowSpacing="16" IsVisible="{Binding ManifestDownloaded}">
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <TextBox Grid.Column="0" />
+
+                <DropDownButton Grid.Column="1" Content="{Binding VersionChannel}">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuItem Header="Release" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Release"/>
+                            <MenuItem Header="Snapshot" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Snapshot"/>
+                            <MenuItem Header="Old Beta" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Old Beta"/>
+                            <MenuItem Header="Old Alpha" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Old Alpha"/>
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+
+            </Grid>
+
+            <ScrollViewer Grid.Row="1">
+                <ItemsRepeater ItemsSource="{Binding FilteredVersions}">
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout MaximumRowsOrColumns="5" MinRowSpacing="18" MinColumnSpacing="12" ItemsJustification="SpaceAround" ItemsStretch="Fill" />
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate DataType="vm:VersionItemViewModel">
+                            <views:VersionCard />
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
+        </Grid>
 
         <TextBlock IsVisible="{Binding !ManifestDownloaded}">Downloading version manifest...</TextBlock>
     </Panel>
