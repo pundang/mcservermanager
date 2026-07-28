@@ -11,5 +11,5 @@ public interface IVersionManagerService
     Manifest? VersionManifest { get; set; }
 
     Task DownloadManifest();
-    Task DownloadVersionBinary(string versionId);
+    Task<bool> DownloadVersionBinary(string versionId);
 }

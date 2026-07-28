@@ -13,6 +13,7 @@
 * Improved styling for Versions tab.
 * Fixed a crash when trying to download a version with no multiplayer.
 * Added version filtering to the Versions tab (only by type temporarily).
+* Improved version download logic and UI.
 
 ## v0.1.0-alpha.3
 

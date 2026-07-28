@@ -57,20 +57,26 @@ public partial class VersionManagerService(IStorageManagerService storageManager
     }
 
     /// <summary>
-    /// Downloads the version server binary
+    /// Downloads the version server binary.
+    /// Returns true if able, false if unable
     /// </summary>
-    public async Task DownloadVersionBinary(string versionId)
+    public async Task<bool> DownloadVersionBinary(string versionId)
     {
         MinecraftVersion? minecraftVersion = await DownloadVersionInfo(versionId);
 
         if (minecraftVersion is null)
-            return;
+            return false;
 
-        MinecraftVersionDownloads versionDownloads = minecraftVersion.Downloads;
+        DownloadEntry serverDownloadEntry = minecraftVersion.Downloads.Server!;
 
-        string url = versionDownloads.Server.Url;
+        if (serverDownloadEntry is null)
+            return false; // version exists but doesn't contain download for server
+
+        string url = serverDownloadEntry.Url;
         Stream downloadStream = await _httpClient.GetStreamAsync(url);
         await _storageManagerService.DownloadOrReplaceServerJarAsync(downloadStream);
+
+        return true;
     }
 
     public void Dispose()
