@@ -4,13 +4,15 @@
              x:Class="MCServerManager.Views.VersionCard"
              x:DataType="vm:VersionItemViewModel">
 
-    <StackPanel Spacing="6">
-        <TextBlock Text="{Binding Version.Id}" FontSize="18" FontWeight="Bold" />
+    <Border Background="#10ffffff" Padding="8" CornerRadius="10">
+        <StackPanel Spacing="6">
+            <TextBlock Text="{Binding Version.Id}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" />
 
-        <TextBlock Text="{Binding Version.Type}" Foreground="Gray" />
+            <TextBlock Text="{Binding Version.Type}" Foreground="Gray" HorizontalAlignment="Center" />
 
-        <Button Content="Install"
-                Command="{Binding InstallVersionCommand}"
-                CommandParameter="{Binding Version.Id}" />
-    </StackPanel>
+            <Button Content="Install"
+                    Command="{Binding InstallVersionCommand}"
+                    CommandParameter="{Binding Version.Id}" HorizontalAlignment="Center" />
+        </StackPanel>
+    </Border>
 </UserControl>

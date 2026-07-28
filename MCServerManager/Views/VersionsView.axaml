@@ -15,8 +15,7 @@
         <ScrollViewer IsVisible="{Binding ManifestDownloaded}">
             <ItemsRepeater ItemsSource="{Binding Versions}">
                 <ItemsRepeater.Layout>
-                    <UniformGridLayout MinItemWidth="300" MinItemHeight="110"
-                                       MinColumnSpacing="8" MinRowSpacing="16" />
+                    <UniformGridLayout MaximumRowsOrColumns="5" MinRowSpacing="18" MinColumnSpacing="12" ItemsJustification="SpaceAround" ItemsStretch="Fill" />
                 </ItemsRepeater.Layout>
                 <ItemsRepeater.ItemTemplate>
                     <DataTemplate DataType="vm:VersionItemViewModel">

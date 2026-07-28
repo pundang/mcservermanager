@@ -10,6 +10,7 @@
 * Renamed Software tab to Versions.
 * Optimized Console tab for faster rendering.
 * Optimized Settings tab for faster rendering.
+* Improved styling for Versions tab.
 
 ## v0.1.0-alpha.3
 
