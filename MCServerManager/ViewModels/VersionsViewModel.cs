@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ public partial class VersionsViewModel : ViewModelBase
     [ObservableProperty]
     public partial bool ManifestDownloaded { get; set; } = false;
 
-    public Collection<VersionItemViewModel> Versions { get; set; } = [];
+    public List<VersionItemViewModel> Versions { get; set; } = [];
     [ObservableProperty]
     public partial ObservableCollection<VersionItemViewModel> FilteredVersions { get; set; } = [];
     [ObservableProperty]
@@ -32,11 +33,10 @@ public partial class VersionsViewModel : ViewModelBase
         if (_versionManagerService.VersionManifest is null)
             await _versionManagerService.DownloadManifest();
 
-        Versions = new ObservableCollection<VersionItemViewModel>(
-            _versionManagerService.VersionManifest!.Versions
-                .Select(v => new VersionItemViewModel(v, _versionManagerService)));
+        Versions = [.. _versionManagerService.VersionManifest!.Versions
+        .Select(v => new VersionItemViewModel(v, _versionManagerService))];
 
-        _ = FilterVersionsByType("Release");
+        await FilterVersionsByType("Release");
 
         ManifestDownloaded = true;
     }
@@ -55,13 +55,11 @@ public partial class VersionsViewModel : ViewModelBase
             _ => VersionBaseType.Release
         };
 
-        if (_versionManagerService.VersionManifest is null)
-            await _versionManagerService.DownloadManifest();
+        if (Versions.Count == 0)
+            await LoadVersionsAsync();
 
         FilteredVersions = new ObservableCollection<VersionItemViewModel>(
-            _versionManagerService.VersionManifest!.Versions
-            .Where(v => v.Type == versionType)
-            .Select(v => new VersionItemViewModel(v, _versionManagerService))
+            Versions.Where(vm => vm.Version.Type == versionType)
         );
     }
 }
