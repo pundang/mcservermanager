@@ -8,7 +8,7 @@ namespace MCServerManager.Services;
 /// </summary>
 public interface IVersionManagerService
 {
-    public Manifest? VersionManifest { get; set; }
+    Manifest? VersionManifest { get; set; }
 
     Task GetManifest();
     Task DownloadVersion(string versionId);
