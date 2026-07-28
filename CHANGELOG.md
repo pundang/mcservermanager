@@ -8,6 +8,7 @@
 * Improved code efficiency and optimizations.
 * Added CHANGELOG.md.
 * Renamed Software tab to Versions.
+* Optimized Console tab for faster rendering.
 
 ## v0.1.0-alpha.3
 
