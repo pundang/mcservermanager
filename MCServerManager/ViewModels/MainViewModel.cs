@@ -61,7 +61,7 @@ public partial class MainViewModel : ObservableObject
     {
         "Console" => _provider.GetRequiredService<ConsoleViewModel>(),
         "Settings" => _provider.GetRequiredService<ServerSettingsViewModel>(),
-        "Software" => _provider.GetRequiredService<SoftwareViewModel>(),
+        "Versions" => _provider.GetRequiredService<VersionsViewModel>(),
         _ => CurrentViewModel
     };
 

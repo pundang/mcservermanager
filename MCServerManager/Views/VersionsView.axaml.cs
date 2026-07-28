@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace MCServerManager.Views;
 
-public partial class SoftwareView : UserControl
+public partial class VersionsView : UserControl
 {
-    public SoftwareView()
+    public VersionsView()
     {
         InitializeComponent();
     }

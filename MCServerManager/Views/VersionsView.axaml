@@ -5,10 +5,10 @@
              xmlns:vm="using:MCServerManager.ViewModels"
              xmlns:views="using:MCServerManager.Views"
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
-             x:Class="MCServerManager.Views.SoftwareView"
-             x:DataType="vm:SoftwareViewModel">
+             x:Class="MCServerManager.Views.VersionsView"
+             x:DataType="vm:VersionsViewModel">
     <Design.DataContext>
-        <vm:SoftwareViewModel />
+        <vm:VersionsViewModel />
     </Design.DataContext>
 
     <Panel>

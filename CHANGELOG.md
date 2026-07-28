@@ -7,6 +7,7 @@
 * Fix HotAvalonia being included in Release builds.
 * Improved code efficiency and optimizations.
 * Added CHANGELOG.md.
+* Renamed Software tab to Versions.
 
 ## v0.1.0-alpha.3
 

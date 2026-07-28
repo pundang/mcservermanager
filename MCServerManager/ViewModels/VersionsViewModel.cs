@@ -6,7 +6,7 @@ using MCServerManager.Services;
 
 namespace MCServerManager.ViewModels;
 
-public partial class SoftwareViewModel : ViewModelBase
+public partial class VersionsViewModel : ViewModelBase
 {
     private readonly IVersionManagerService _versionManagerService;
 
@@ -16,7 +16,7 @@ public partial class SoftwareViewModel : ViewModelBase
     [ObservableProperty]
     public partial ObservableCollection<VersionItemViewModel> Versions { get; set; } = [];
 
-    public SoftwareViewModel(IVersionManagerService versionManagerService)
+    public VersionsViewModel(IVersionManagerService versionManagerService)
     {
         _versionManagerService = versionManagerService;
         _ = LoadVersionsAsync();
