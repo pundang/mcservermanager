@@ -14,22 +14,20 @@
     <Panel>
         <Grid RowDefinitions="*,Auto" RowSpacing="8" IsVisible="{Binding !ServerSettingsIsEmpty}">
             <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding ServerSettings}">
-                    <ItemsControl.ItemTemplate>
+                <ItemsRepeater ItemsSource="{Binding ServerSettings}">
+                    <ItemsRepeater.ItemTemplate>
                         <DataTemplate DataType="models:ServerSetting">
                             <StackPanel Spacing="4">
                                 <TextBlock Text="{Binding Key}" x:Name="Key"/>
                                 <TextBox Text="{Binding Value}" x:Name="Value"/>
                             </StackPanel>
                         </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                    </ItemsRepeater.ItemTemplate>
 
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="3" ColumnSpacing="16" RowSpacing="8" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout MaximumRowsOrColumns="4" MinRowSpacing="10" MinColumnSpacing="8" ItemsJustification="SpaceBetween" ItemsStretch="Fill" />
+                    </ItemsRepeater.Layout>
+                </ItemsRepeater>
             </ScrollViewer>
 
             <Button Grid.Row="1" HorizontalAlignment="Right" Command="{Binding SaveSettingsCommand}">Save settings</Button>

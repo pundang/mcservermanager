@@ -32,8 +32,6 @@ public partial class ServerSettingsService(IStorageManagerService storageManager
                 continue;
             }
 
-            Debug.WriteLine($"{match.Groups["key"].Value} = {match.Groups["value"].Value}");
-
             settings.Add(new ServerSetting
             {
                 Key = match.Groups["key"].Value,
