@@ -7,7 +7,7 @@ Cross-platform application for setting up and managing a Minecraft server.
 
 ## Notes
 
-* Players and options tab aren't working
+* Players tab isn't working
 * Version manager UI may improve in the future, but for now it works fine
 
 ## Planned features
