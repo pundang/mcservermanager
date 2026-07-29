@@ -12,25 +12,29 @@
     </Design.DataContext>
 
     <Panel>
-        <Grid RowDefinitions="*,Auto" RowSpacing="8" IsVisible="{Binding !ServerSettingsIsEmpty}">
-            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-                <ItemsRepeater ItemsSource="{Binding ServerSettings}">
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate DataType="models:ServerSetting">
-                            <StackPanel Spacing="4">
-                                <TextBlock Text="{Binding Key}" x:Name="Key"/>
-                                <TextBox Text="{Binding Value}" x:Name="Value"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
+        <Grid RowDefinitions="Auto,*" RowSpacing="12" IsVisible="{Binding !ServerSettingsIsEmpty}">
+            <TextBlock Grid.Row="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Settings</TextBlock>
 
-                    <ItemsRepeater.Layout>
-                        <UniformGridLayout MaximumRowsOrColumns="4" MinRowSpacing="10" MinColumnSpacing="8" ItemsJustification="SpaceBetween" ItemsStretch="Fill" />
-                    </ItemsRepeater.Layout>
-                </ItemsRepeater>
-            </ScrollViewer>
+            <Grid Grid.Row="1" RowDefinitions="*,Auto" RowSpacing="8">
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                    <ItemsRepeater ItemsSource="{Binding ServerSettings}" Margin="0,0,15,0">
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate DataType="models:ServerSetting">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="{Binding Key}" x:Name="Key"/>
+                                    <TextBox Text="{Binding Value}" x:Name="Value"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
 
-            <Button Grid.Row="1" HorizontalAlignment="Right" Command="{Binding SaveSettingsCommand}">Save settings</Button>
+                        <ItemsRepeater.Layout>
+                            <UniformGridLayout MaximumRowsOrColumns="4" MinRowSpacing="10" MinColumnSpacing="8" ItemsJustification="SpaceBetween" ItemsStretch="Fill" />
+                        </ItemsRepeater.Layout>
+                    </ItemsRepeater>
+                </ScrollViewer>
+
+                <Button Grid.Row="1" HorizontalAlignment="Right" Command="{Binding SaveSettingsCommand}">Save settings</Button>
+            </Grid>
         </Grid>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" IsVisible="{Binding ServerSettingsIsEmpty}" Spacing="16">

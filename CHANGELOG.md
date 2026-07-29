@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.0-alpha.5
+
+* Added titles to the tabs.
+
 ## v0.1.0-alpha.4
 
 * Optimized settings saving.

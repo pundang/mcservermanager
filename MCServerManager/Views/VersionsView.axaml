@@ -13,16 +13,20 @@
 
     <Panel>
         <Grid RowDefinitions="Auto,*" RowSpacing="16" IsVisible="{Binding ManifestDownloaded}">
-            <DropDownButton HorizontalAlignment="Right" Grid.Column="1" Content="{Binding VersionChannel}">
-                <DropDownButton.Flyout>
-                    <MenuFlyout Placement="Bottom">
-                        <MenuItem Header="Release" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Release"/>
-                        <MenuItem Header="Snapshot" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Snapshot"/>
-                        <MenuItem Header="Old Beta" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Old Beta"/>
-                        <MenuItem Header="Old Alpha" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Old Alpha"/>
-                    </MenuFlyout>
-                </DropDownButton.Flyout>
-            </DropDownButton>
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                <TextBlock Grid.Column="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Versions</TextBlock>
+
+                <DropDownButton Grid.Column="1" HorizontalAlignment="Right" Content="{Binding VersionChannel}">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuItem Header="Release" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Release"/>
+                            <MenuItem Header="Snapshot" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Snapshot"/>
+                            <MenuItem Header="Old Beta" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Old Beta"/>
+                            <MenuItem Header="Old Alpha" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Old Alpha"/>
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+            </Grid>
 
             <ScrollViewer Grid.Row="1">
                 <ItemsRepeater ItemsSource="{Binding FilteredVersions}">
