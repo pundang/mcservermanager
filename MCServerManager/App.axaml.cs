@@ -27,10 +27,11 @@ public partial class App : Application
         services.AddSingleton<IStorageManagerService, StorageManagerService>();
         services.AddSingleton<IVersionManagerService, VersionManagerService>();
         services.AddSingleton<IServerSettingsService, ServerSettingsService>();
-        services.AddSingleton<VersionsViewModel>();
-        services.AddTransient<ServerSettingsViewModel>();
         services.AddTransient<MainViewModel>();
+        services.AddTransient<DashboardViewModel>();
         services.AddSingleton<ConsoleViewModel>();
+        services.AddTransient<ServerSettingsViewModel>();
+        services.AddSingleton<VersionsViewModel>();
 
         Services = services.BuildServiceProvider();
 

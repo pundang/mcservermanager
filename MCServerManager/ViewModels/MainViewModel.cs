@@ -41,7 +41,7 @@ public partial class MainViewModel : ObservableObject
         _provider = serviceProvider;
         _processService = processService;
         _storageManagerService = storageManagerService;
-        CurrentViewModel = _provider.GetRequiredService<ConsoleViewModel>();
+        CurrentViewModel = _provider.GetRequiredService<DashboardViewModel>();
 
         // Send signals to UI when the process changes status
         _processService.StatusChanged += (_, _) =>
@@ -59,6 +59,7 @@ public partial class MainViewModel : ObservableObject
     private void SelectTab(string tab) =>
     CurrentViewModel = tab switch
     {
+        "Dashboard" => _provider.GetRequiredService<DashboardViewModel>(),
         "Console" => _provider.GetRequiredService<ConsoleViewModel>(),
         "Settings" => _provider.GetRequiredService<ServerSettingsViewModel>(),
         "Versions" => _provider.GetRequiredService<VersionsViewModel>(),
