@@ -13,8 +13,23 @@
     <Grid RowDefinitions="Auto,*" RowSpacing="8">
         <TextBlock Grid.Row="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Dashboard</TextBlock>
 
-        <Grid Grid.Row="1">
-            <Button Command="{Binding OpenServerInExplorerCommand}">Browse files</Button>
-        </Grid>
+        <UniformGrid Grid.Row="1" RowSpacing="8" ColumnSpacing="8">
+            <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8">
+                <DockPanel VerticalSpacing="4" Margin="8" LastChildFill="True">
+                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Stretch" FontWeight="UltraLight" LetterSpacing="0.5">Memory</TextBlock>
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <TextBlock Text="{Binding RamUsagePercentage, StringFormat={}{0:0}%}" />
+                        <TextBlock Text="{Binding RamUsage, StringFormat={}{0:0}MB}" Foreground="Gray" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8">
+                <DockPanel VerticalSpacing="4" Margin="8" LastChildFill="True">
+                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Stretch" FontWeight="UltraLight" LetterSpacing="0.5">CPU</TextBlock>
+                    <TextBlock Text="{Binding CpuUsage, StringFormat={}{0:0}%}" />
+                </DockPanel>
+            </Border>
+        </UniformGrid>
     </Grid>
 </UserControl>

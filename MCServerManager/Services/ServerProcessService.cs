@@ -16,14 +16,20 @@ public class ServerProcessService : IServerProcessService, IDisposable
 {
     private Process? _process;
     private readonly DispatcherTimer _statsTimer;
+    private TimeSpan _lastCpuTime;
+    private DateTime _lastCpuSampleTime;
 
     public ServerProcessInfo Info { get; } = new();
+    public int MaxMemory { get; set; }
 
     public event EventHandler<string>? OutputReceived;
     public event EventHandler<ServerStatus>? StatusChanged;
+    public event EventHandler<ResourceUsage>? ResourceUsageChanged;
 
     public ServerProcessService()
     {
+        MaxMemory = 2048; // 2G
+
         _statsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         _statsTimer.Tick += (_, _) => UpdateStats();
     }
@@ -31,7 +37,7 @@ public class ServerProcessService : IServerProcessService, IDisposable
     /// <summary>
     /// Starts the server by executing a command
     /// </summary>
-    public Task StartAsync(string workingDirectory, string javaArgs = "-Xmx2G -jar server.jar nogui")
+    public Task StartAsync(string workingDirectory, int maxMemory = 2048, string javaArgs = "-jar server.jar nogui")
     {
         if (_process is { HasExited: false })
             return Task.CompletedTask;
@@ -43,7 +49,7 @@ public class ServerProcessService : IServerProcessService, IDisposable
             StartInfo = new ProcessStartInfo
             {
                 FileName = "java",
-                Arguments = javaArgs,
+                Arguments = $"-Xmx{maxMemory}M {javaArgs}",
                 WorkingDirectory = workingDirectory,
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
@@ -65,6 +71,11 @@ public class ServerProcessService : IServerProcessService, IDisposable
 
         Info.ProcessId = _process.Id;
         Info.StartedAt = DateTime.Now;
+
+        // baseline for CPU % calc
+        _lastCpuTime = _process.TotalProcessorTime;
+        _lastCpuSampleTime = DateTime.UtcNow;
+
         SetStatus(ServerStatus.Running);
         _statsTimer.Start();
 
@@ -102,7 +113,7 @@ public class ServerProcessService : IServerProcessService, IDisposable
     {
         var workingDir = _process?.StartInfo.WorkingDirectory ?? "";
         await StopAsync();
-        await StartAsync(workingDir);
+        await StartAsync(workingDir, MaxMemory);
     }
 
     /// <summary>
@@ -133,8 +144,28 @@ public class ServerProcessService : IServerProcessService, IDisposable
         if (_process is null || _process.HasExited) return;
 
         _process.Refresh();
+
         Info.Uptime = DateTime.Now - (Info.StartedAt ?? DateTime.Now);
         Info.MemoryUsageMb = _process.WorkingSet64 / 1024 / 1024;
+
+        var now = DateTime.UtcNow;
+        var currentCpuTime = _process.TotalProcessorTime;
+
+        var elapsedMs = (now - _lastCpuSampleTime).TotalMilliseconds;
+        var cpuUsedMs = (currentCpuTime - _lastCpuTime).TotalMilliseconds;
+
+        var cpuPercent = elapsedMs > 0
+            ? (float)(cpuUsedMs / (Environment.ProcessorCount * elapsedMs) * 100)
+            : 0f;
+
+        _lastCpuTime = currentCpuTime;
+        _lastCpuSampleTime = now;
+
+        ResourceUsageChanged?.Invoke(this, new ResourceUsage
+        {
+            Cpu = cpuPercent,
+            Ram = _process.WorkingSet64 / 1024f / 1024f // MB
+        });
     }
 
     /// <summary>

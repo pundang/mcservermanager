@@ -10,11 +10,13 @@ namespace MCServerManager.Services;
 public interface IServerProcessService
 {
     ServerProcessInfo Info { get; }
+    int MaxMemory { get; set; }
 
     event EventHandler<string>? OutputReceived; // Raw stdout/stderr lines
     event EventHandler<ServerStatus>? StatusChanged;
+    event EventHandler<ResourceUsage>? ResourceUsageChanged;
 
-    Task StartAsync(string workingDirectory, string javaArgs = "-Xmx2G -jar server.jar nogui");
+    Task StartAsync(string workingDirectory, int maxMemory = 2048, string javaArgs = "-jar server.jar nogui");
     Task StopAsync(TimeSpan? gracefulTimeout = null);
     Task RestartAsync();
     Task SendCommandAsync(string command);
