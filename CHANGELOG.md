@@ -3,6 +3,8 @@
 ## v0.1.0-alpha.5
 
 * Added titles to the tabs.
+* Added Dashboard tab.
+* Added CPU and RAM usage to the Dashboard tab.
 
 ## v0.1.0-alpha.4
 

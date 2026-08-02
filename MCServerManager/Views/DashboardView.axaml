@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="using:MCServerManager.Controls"
              xmlns:vm="using:MCServerManager.ViewModels"
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
              x:Class="MCServerManager.Views.DashboardView"
@@ -15,19 +16,23 @@
 
         <UniformGrid Grid.Row="1" RowSpacing="8" ColumnSpacing="8">
             <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8">
-                <DockPanel VerticalSpacing="4" Margin="8" LastChildFill="True">
+                <DockPanel VerticalSpacing="4" Margin="8">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Stretch" FontWeight="UltraLight" LetterSpacing="0.5">Memory</TextBlock>
-                    <StackPanel Orientation="Horizontal" Spacing="4">
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="4">
                         <TextBlock Text="{Binding RamUsagePercentage, StringFormat={}{0:0}%}" />
                         <TextBlock Text="{Binding RamUsage, StringFormat={}{0:0}MB}" Foreground="Gray" />
                     </StackPanel>
+
+                    <controls:Sparkline Points="{Binding RamHistory}" Stroke="#4FC3F7" StrokeThickness="2" Minimum="0" Maximum="100" />
                 </DockPanel>
             </Border>
 
             <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8">
-                <DockPanel VerticalSpacing="4" Margin="8" LastChildFill="True">
+                <DockPanel VerticalSpacing="4" Margin="8">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Stretch" FontWeight="UltraLight" LetterSpacing="0.5">CPU</TextBlock>
-                    <TextBlock Text="{Binding CpuUsage, StringFormat={}{0:0}%}" />
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding CpuUsage, StringFormat={}{0:0}%}" />
+
+                    <controls:Sparkline Points="{Binding CpuHistory}" Stroke="#81C784" StrokeThickness="2" Minimum="0" Maximum="100" />
                 </DockPanel>
             </Border>
         </UniformGrid>
