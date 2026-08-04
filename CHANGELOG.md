@@ -5,6 +5,8 @@
 * Added titles to the tabs.
 * Added Dashboard tab.
 * Added CPU and RAM usage to the Dashboard tab.
+* Removed "Players" tab indefinitely.
+* Updated settings tab styling.
 
 ## v0.1.0-alpha.4
 
