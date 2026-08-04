@@ -15,8 +15,8 @@
         <TextBlock Grid.Row="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Dashboard</TextBlock>
 
         <UniformGrid Grid.Row="1" RowSpacing="8" ColumnSpacing="8">
-            <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8">
-                <DockPanel VerticalSpacing="4" Margin="8">
+            <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8" Padding="8">
+                <DockPanel VerticalSpacing="4">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Stretch" FontWeight="UltraLight" LetterSpacing="0.5">Memory</TextBlock>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="4">
                         <TextBlock Text="{Binding RamUsagePercentage, StringFormat={}{0:0}%}" />
@@ -27,8 +27,8 @@
                 </DockPanel>
             </Border>
 
-            <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8">
-                <DockPanel VerticalSpacing="4" Margin="8">
+            <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8" Padding="8">
+                <DockPanel VerticalSpacing="4">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Stretch" FontWeight="UltraLight" LetterSpacing="0.5">CPU</TextBlock>
                     <TextBlock DockPanel.Dock="Top" Text="{Binding CpuUsage, StringFormat={}{0:0}%}" />
 
