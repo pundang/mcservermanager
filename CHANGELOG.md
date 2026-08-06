@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.0-alpha.7
+
+* Minor installer fixes and changes.
+
 ## v0.1.0-alpha.6
 
 * Fixed installer version.
