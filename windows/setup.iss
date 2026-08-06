@@ -1,6 +1,6 @@
 [Setup]
 AppName=MCServerManager
-AppVersion=0.1.0.alpha.1
+AppVersion=0.1.0.alpha.6
 DefaultDirName={autopf}\MCServerManager
 DefaultGroupName=MCServerManager
 OutputDir=Output
