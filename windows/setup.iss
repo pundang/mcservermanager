@@ -9,6 +9,7 @@ Compression=lzma
 SolidCompression=yes
 ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
+AppId={{d691bba6-928e-4dc1-9379-8695881c8b42}}
 
 [Files]
 Source: "..\publish\win-x64\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
