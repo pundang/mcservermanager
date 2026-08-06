@@ -11,7 +11,7 @@ ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 
 [Files]
-Source: "..\publish\win-x64\*"; DestDir: "{app}"; Flags: recursesubdirs
+Source: "..\publish\win-x64\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
 
 [Icons]
 Name: "{group}\MCServerManager"; Filename: "{app}\MCServerManager.Desktop.exe"
