@@ -11,6 +11,7 @@ public interface IStorageManagerService
 {
     string ServerDirectory { get; }
     string ServerJarPath { get; }
+    string RootDirectory { get; }
 
     Task DownloadOrReplaceServerJarAsync(Stream content, CancellationToken cancellationToken = default);
     Task<string> LoadFileAsStringAsync(string path, CancellationToken cancellationToken = default);

@@ -12,6 +12,7 @@ public class StorageManagerService : IStorageManagerService
 {
     public string ServerDirectory { get; }
     public string ServerJarPath { get; }
+    public string RootDirectory { get; }
 
     private const int RandomAccessBufferSize = 81920;
 
@@ -19,6 +20,8 @@ public class StorageManagerService : IStorageManagerService
     {
         string appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         string root = Path.Combine(appData, "MCServerManager");
+
+        RootDirectory = root;
 
         string serverPath = Path.Combine(root, "server");
         string jarPath = Path.Combine(serverPath, "server.jar");
