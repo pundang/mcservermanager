@@ -35,7 +35,7 @@ public partial class VersionManagerService(IStorageManagerService storageManager
         catch (Exception ex) when (ex is JsonException or HttpRequestException)
         {
             Debug.WriteLine($"Failed to download manifest from URL '{_manifestUrl}': {ex.Message}");
-            return null;
+            throw;
         }
     }
 

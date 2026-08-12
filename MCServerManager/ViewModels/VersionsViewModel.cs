@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -15,6 +17,10 @@ public partial class VersionsViewModel : ViewModelBase
 
     [ObservableProperty]
     public partial bool ManifestDownloaded { get; set; } = false;
+    [ObservableProperty]
+    public partial bool ManifestDownloadError { get; set; } = false;
+    [ObservableProperty]
+    public partial string ManifestDownloadErrorMessage { get; set; } = "Unknown";
 
     public List<VersionItemViewModel> Versions { get; set; } = [];
     [ObservableProperty]
@@ -28,10 +34,24 @@ public partial class VersionsViewModel : ViewModelBase
         _ = LoadVersionsAsync();
     }
 
+    [RelayCommand]
     private async Task LoadVersionsAsync()
     {
-        if (_versionManagerService.VersionManifest is null)
-            await _versionManagerService.DownloadManifest();
+        // If user re-tries to download manifest
+        ManifestDownloadError = false;
+        ManifestDownloadErrorMessage = "Unknown";
+
+        try
+        {
+            if (_versionManagerService.VersionManifest is null)
+                await _versionManagerService.DownloadManifest();
+        }
+        catch (Exception ex)
+        {
+            ManifestDownloadError = true;
+            ManifestDownloadErrorMessage = ex.Message;
+            return;
+        }
 
         Versions = [.. _versionManagerService.VersionManifest!.Versions
         .Select(v => new VersionItemViewModel(v, _versionManagerService))];

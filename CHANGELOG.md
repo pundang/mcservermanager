@@ -5,6 +5,7 @@
 * Minor installer fixes and changes.
 * Improved version download logic.
 * Fixed crash when internet is not available when trying to download a version.
+* Improved version download error handling.
 
 ## v0.1.0-alpha.6
 

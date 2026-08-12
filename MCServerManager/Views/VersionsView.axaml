@@ -42,6 +42,13 @@
             </ScrollViewer>
         </Grid>
 
-        <TextBlock IsVisible="{Binding !ManifestDownloaded}" HorizontalAlignment="Center" VerticalAlignment="Center">Downloading version manifest...</TextBlock>
+        <Panel IsVisible="{Binding !ManifestDownloaded}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock IsVisible="{Binding !ManifestDownloadError}">Downloading version list...</TextBlock>
+
+            <StackPanel IsVisible="{Binding ManifestDownloadError}" Spacing="16">
+                <TextBlock Text="{Binding ManifestDownloadErrorMessage, StringFormat='Failed to download version list: {0}'}" />
+                <Button Command="{Binding LoadVersionsCommand}" HorizontalAlignment="Center">Retry</Button>
+            </StackPanel>
+        </Panel>
     </Panel>
 </UserControl>
