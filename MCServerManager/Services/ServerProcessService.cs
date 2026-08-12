@@ -181,7 +181,11 @@ public class ServerProcessService : IServerProcessService, IDisposable
     public void Dispose()
     {
         _statsTimer.Stop();
+
+        if (_process is { HasExited: false })
+            _process.Kill(entireProcessTree: true);
         _process?.Dispose();
+
         GC.SuppressFinalize(this);
     }
 }

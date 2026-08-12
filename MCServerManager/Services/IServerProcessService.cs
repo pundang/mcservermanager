@@ -7,7 +7,7 @@ namespace MCServerManager.Services;
 /// <summary>
 /// Interface for the service that manages the Minecraft server process
 /// </summary>
-public interface IServerProcessService
+public interface IServerProcessService : IDisposable
 {
     ServerProcessInfo Info { get; }
     int MaxMemory { get; set; }

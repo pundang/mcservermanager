@@ -6,6 +6,7 @@ using MCServerManager.ViewModels;
 using MCServerManager.Views;
 using MCServerManager.Services;
 using System;
+using MCServerManager.Models;
 
 namespace MCServerManager;
 
@@ -36,9 +37,20 @@ public partial class App : Application
         Services = services.BuildServiceProvider();
 
         var mainViewModel = Services.GetRequiredService<MainViewModel>();
+        var serverProcessService = Services.GetRequiredService<IServerProcessService>();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            desktop.ShutdownRequested += async (_, e) =>
+            {
+                if (serverProcessService.Info.Status is ServerStatus.Running or ServerStatus.Starting)
+                {
+                    e.Cancel = true; // pause shutdown
+                    await serverProcessService.StopAsync();
+                    desktop.Shutdown(); // after stopping the process shut it down
+                }
+            };
+
             desktop.MainWindow = new MainWindow
             {
                 DataContext = mainViewModel

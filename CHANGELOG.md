@@ -7,6 +7,7 @@
 * Fixed crash when internet is not available when trying to download a version.
 * Improved version download error handling.
 * Added comments to the ui code (AI).
+* Fixed server not being able to launch after closing the app without shutting down the server.
 
 ## v0.1.0-alpha.6
 
