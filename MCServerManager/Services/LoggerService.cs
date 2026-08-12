@@ -15,7 +15,7 @@ public partial class LoggerService : ILoggerService
     [GeneratedRegex(@"^\[\d{1,2}:\d{1,2}:\d{1,2}\] \[[^\]]*/(?<level>INFO|WARN|ERROR|DEBUG|TRACE|FATAL)\]: (?<msg>.*)$")]
     private static partial Regex LogRegex();
 
-    public void ParseLine(string line)
+    public void CreateLogFromString(string line)
     {
         var match = LogRegex().Match(line);
 

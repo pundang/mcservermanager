@@ -10,5 +10,5 @@ public interface ILoggerService
 {
     event EventHandler<Log>? LogOutput;
 
-    void ParseLine(string log);
+    void CreateLogFromString(string log);
 }

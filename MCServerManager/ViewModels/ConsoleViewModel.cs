@@ -14,7 +14,7 @@ public partial class ConsoleViewModel : ViewModelBase
     public ConsoleViewModel(IServerProcessService processService, ILoggerService loggerService)
     {
         _processService = processService;
-        _processService.OutputReceived += (_, line) => loggerService.ParseLine(line);
+        _processService.OutputReceived += (_, line) => loggerService.CreateLogFromString(line);
 
         _loggerService = loggerService;
         _loggerService.LogOutput += (_, log) =>
