@@ -12,6 +12,7 @@
     <Grid RowDefinitions="Auto,*" RowSpacing="16">
         <TextBlock Grid.Row="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Console</TextBlock>
 
+        <!-- Log scroll viewer for console output -->
         <Grid Grid.Row="1" RowDefinitions="*,Auto" RowSpacing="4">
             <ScrollViewer>
                 <ItemsRepeater Grid.Row="0"

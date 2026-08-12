@@ -12,6 +12,7 @@
     </Design.DataContext>
 
     <Panel>
+        <!-- Main content panel for server settings -->
         <Grid RowDefinitions="Auto,*" RowSpacing="12" IsVisible="{Binding !ServerSettingsIsEmpty}">
             <TextBlock Grid.Row="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Settings</TextBlock>
 

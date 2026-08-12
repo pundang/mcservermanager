@@ -11,9 +11,11 @@
         <vm:DashboardViewModel />
     </Design.DataContext>
 
+    <!-- Main content area with dashboard metrics -->
     <Grid RowDefinitions="Auto,*" RowSpacing="8">
         <TextBlock Grid.Row="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Dashboard</TextBlock>
 
+        <!-- Metric grid layout -->
         <UniformGrid Grid.Row="1" RowSpacing="8" ColumnSpacing="8">
             <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8" Padding="8">
                 <DockPanel VerticalSpacing="4">

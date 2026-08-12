@@ -11,11 +11,13 @@
         <vm:VersionsViewModel />
     </Design.DataContext>
 
+    <!-- Main content panel containing version list and loading indicator -->
     <Panel>
         <Grid RowDefinitions="Auto,*" RowSpacing="16" IsVisible="{Binding ManifestDownloaded}">
             <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
                 <TextBlock Grid.Column="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Versions</TextBlock>
 
+                <!-- Dropdown menu for filtering versions by type -->
                 <DropDownButton Grid.Column="1" HorizontalAlignment="Right" Content="{Binding VersionChannel}">
                     <DropDownButton.Flyout>
                         <MenuFlyout Placement="Bottom">

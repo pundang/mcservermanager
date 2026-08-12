@@ -4,6 +4,7 @@
              x:Class="MCServerManager.Views.VersionCard"
              x:DataType="vm:VersionItemViewModel">
 
+    <!-- Version card displaying version information -->
     <Border Background="{DynamicResource ButtonBackgroundPointerOver}" Padding="8" CornerRadius="10">
         <StackPanel Spacing="6">
             <TextBlock Text="{Binding Version.Id}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" />
