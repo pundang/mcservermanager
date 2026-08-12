@@ -21,11 +21,10 @@ public class StorageManagerService : IStorageManagerService
         string appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         string root = Path.Combine(appData, "MCServerManager");
 
-        RootDirectory = root;
-
         string serverPath = Path.Combine(root, "server");
         string jarPath = Path.Combine(serverPath, "server.jar");
 
+        RootDirectory = root;
         ServerDirectory = serverPath;
         ServerJarPath = jarPath;
     }
