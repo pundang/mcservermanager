@@ -42,6 +42,6 @@
             </ScrollViewer>
         </Grid>
 
-        <TextBlock IsVisible="{Binding !ManifestDownloaded}">Downloading version manifest...</TextBlock>
+        <TextBlock IsVisible="{Binding !ManifestDownloaded}" HorizontalAlignment="Center" VerticalAlignment="Center">Downloading version manifest...</TextBlock>
     </Panel>
 </UserControl>
