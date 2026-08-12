@@ -23,17 +23,16 @@ public partial class VersionItemViewModel(VersionBase version, IVersionManagerSe
         InstallButtonText = "Installing...";
         InstallButtonEnabled = false;
 
-        bool downloadable = await _versionManagerService.DownloadVersionBinary(versionId);
+        DownloadResult downloadable = await _versionManagerService.DownloadVersionBinary(versionId);
 
-        if (!downloadable)
+        InstallButtonText = downloadable switch
         {
-            InstallButtonEnabled = false;
-            InstallButtonText = "Not available...";
-            return;
-        }
-
-        InstallButtonText = "Installed";
-        InstallButtonEnabled = false;
+            DownloadResult.Success => "Installed",
+            DownloadResult.VersionNotFound => "Not found",
+            DownloadResult.NoServerJarAvailable => "Not available",
+            DownloadResult.DownloadFailed => "Failed",
+            _ => "Unknown"
+        };
 
         await Task.Delay(2000);
 

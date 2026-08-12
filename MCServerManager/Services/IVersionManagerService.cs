@@ -10,6 +10,6 @@ public interface IVersionManagerService
 {
     Manifest? VersionManifest { get; set; }
 
-    Task DownloadManifest();
-    Task<bool> DownloadVersionBinary(string versionId);
+    Task<Manifest?> DownloadManifest();
+    Task<DownloadResult> DownloadVersionBinary(string versionId);
 }

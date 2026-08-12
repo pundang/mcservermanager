@@ -3,6 +3,8 @@
 ## v0.1.0-alpha.7
 
 * Minor installer fixes and changes.
+* Improved version download logic.
+* Fixed crash when internet is not available when trying to download a version.
 
 ## v0.1.0-alpha.6
 
