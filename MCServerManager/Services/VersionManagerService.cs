@@ -6,14 +6,19 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 using MCServerManager.Models;
+using Microsoft.Extensions.Logging;
 
 namespace MCServerManager.Services;
 
 /// <summary>
 /// Interface for the service that manages the versions
 /// </summary>
-public partial class VersionManagerService(IStorageManagerService storageManagerService) : IVersionManagerService, IDisposable
+public partial class VersionManagerService(
+    IStorageManagerService storageManagerService,
+    ILogger<VersionManagerService> logger
+) : IVersionManagerService, IDisposable
 {
+    private readonly ILogger<VersionManagerService> _logger = logger;
     private readonly IStorageManagerService _storageManagerService = storageManagerService;
     private readonly string _manifestUrl = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
     private readonly HttpClient _httpClient = new();
@@ -34,7 +39,7 @@ public partial class VersionManagerService(IStorageManagerService storageManager
         }
         catch (Exception ex) when (ex is JsonException or HttpRequestException)
         {
-            Debug.WriteLine($"Failed to download manifest from URL '{_manifestUrl}': {ex.Message}");
+            _logger.LogError("Failed to download manifest from URL '{manifestUrl}': {exception}", _manifestUrl, ex.Message);
             throw;
         }
     }
@@ -46,7 +51,6 @@ public partial class VersionManagerService(IStorageManagerService storageManager
     {
         if (VersionManifest is null)
         {
-            Debug.WriteLine("Getting manifest...");
             await DownloadManifest();
         }
 
@@ -61,7 +65,7 @@ public partial class VersionManagerService(IStorageManagerService storageManager
         }
         catch (Exception ex) when (ex is HttpRequestException or JsonException or TaskCanceledException)
         {
-            Debug.WriteLine($"Failed to download version info for '{versionId}': {ex.Message}");
+            _logger.LogError("Failed to download version info for '{versionId}': {exception}", versionId, ex.Message);
             return null;
         }
     }
@@ -84,11 +88,12 @@ public partial class VersionManagerService(IStorageManagerService storageManager
         {
             await using Stream downloadStream = await _httpClient.GetStreamAsync(serverDownloadEntry.Url);
             await _storageManagerService.DownloadOrReplaceServerJarAsync(downloadStream);
+            _logger.LogInformation("Successfully downloaded version '{versionId}'", versionId);
             return DownloadResult.Success;
         }
         catch (Exception ex) when (ex is HttpRequestException or IOException or TaskCanceledException)
         {
-            Debug.WriteLine($"Failed to download server jar for '{versionId}': {ex.Message}");
+            _logger.LogError("Failed to download server jar for '{versionId}': {exception}", versionId, ex.Message);
             return DownloadResult.DownloadFailed;
         }
     }
