@@ -16,7 +16,7 @@ public partial class DashboardViewModel : ViewModelBase
     readonly IServerProcessService _serverProcessService;
 
     [ObservableProperty]
-    public partial TimeSpan Uptime { get; set; }
+    public partial string Uptime { get; set; }
 
     [ObservableProperty]
     public partial float CpuUsage { get; set; }
@@ -33,9 +33,11 @@ public partial class DashboardViewModel : ViewModelBase
         _storageManagerService = storageManagerService;
         _serverProcessService = serverProcessService;
 
+        Uptime = "00:00:00";
+
         _serverProcessService.ResourceUsageChanged += (_, usage) =>
         {
-            Uptime = _serverProcessService.Info.Uptime;
+            Uptime = _serverProcessService.Info.Uptime.ToString(@"hh\:mm\:ss");
             CpuUsage = usage.Cpu;
             RamUsage = usage.Ram;
             RamUsagePercentage = _serverProcessService.MaxMemory > 0
