@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:MCServerManager.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             x:Class="MCServerManager.Views.EulaView"
+             x:DataType="vm:EulaViewModel">
+    <Design.DataContext>
+        <vm:EulaViewModel />
+    </Design.DataContext>
+
+    <DockPanel VerticalSpacing="8">
+        <TextBlock DockPanel.Dock="Top" FontSize="24" FontWeight="SemiBold">EULA</TextBlock>
+
+        <StackPanel Spacing="16" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock FontSize="18" Text="{Binding EulaPrompt}"/>
+
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                <Button Command="{Binding AcceptEulaCommand}" Content="Accept"/>
+                <Button Command="{Binding RejectEulaCommand}" Content="Reject"/>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

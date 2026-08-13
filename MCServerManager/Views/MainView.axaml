@@ -32,6 +32,8 @@
                              Content="Settings" Command="{Binding SelectTabCommand}" CommandParameter="Settings" />
                 <RadioButton Classes="sidebar-tab" GroupName="Tabs"
                              Content="Versions" Command="{Binding SelectTabCommand}" CommandParameter="Versions" />
+                <RadioButton Classes="sidebar-tab" GroupName="Tabs"
+                             Content="EULA" Command="{Binding SelectTabCommand}" CommandParameter="Eula" />
             </StackPanel>
 
             <!-- Start | Stop button -->

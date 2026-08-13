@@ -88,5 +88,6 @@ public partial class App : Application
         services.AddSingleton<ConsoleViewModel>();
         services.AddTransient<ServerSettingsViewModel>();
         services.AddSingleton<VersionsViewModel>();
+        services.AddSingleton<EulaViewModel>();
     }
 }

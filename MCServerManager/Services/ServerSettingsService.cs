@@ -47,7 +47,7 @@ public partial class ServerSettingsService(IStorageManagerService storageManager
             serverSettingsObject.Select(setting => $"{setting.Key}={setting.Value}")
         ) + "\n";
 
-        await _storageManagerService.SaveFileAsStringAsync(
+        await _storageManagerService.SaveFileFromStringAsync(
             Path.Combine(_storageManagerService.ServerDirectory, "server.properties"),
             content
         );

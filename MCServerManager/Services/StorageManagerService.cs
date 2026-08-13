@@ -58,10 +58,25 @@ public class StorageManagerService : IStorageManagerService
         }
     }
 
-    public async Task<string> LoadFileAsStringAsync(string filePath, CancellationToken cancellationToken = default)
+    public string LoadFileAsString(string path)
+    {
+        using FileStream fs = new(
+            path,
+            FileMode.Open,
+            FileAccess.Read,
+            FileShare.Read,
+            RandomAccessBufferSize,
+            FileOptions.SequentialScan
+        );
+        using StreamReader reader = new(fs);
+
+        return reader.ReadToEnd();
+    }
+
+    public async Task<string> LoadFileAsStringAsync(string path, CancellationToken cancellationToken = default)
     {
         await using FileStream fs = new(
-            filePath,
+            path,
             FileMode.Open,
             FileAccess.Read,
             FileShare.Read,
@@ -73,7 +88,23 @@ public class StorageManagerService : IStorageManagerService
         return await reader.ReadToEndAsync(cancellationToken);
     }
 
-    public async Task SaveFileAsStringAsync(string filePath, string content, CancellationToken cancellationToken = default)
+    public void SaveFileFromString(string filePath, string content)
+    {
+        using FileStream fs = new(
+            filePath,
+            FileMode.Create,
+            FileAccess.Write,
+            FileShare.None,
+            RandomAccessBufferSize
+        );
+        using StreamWriter writer = new(fs);
+
+        writer.WriteAsync(content.AsMemory());
+
+        return;
+    }
+
+    public async Task SaveFileFromStringAsync(string filePath, string content, CancellationToken cancellationToken = default)
     {
         await using FileStream fs = new(
             filePath,

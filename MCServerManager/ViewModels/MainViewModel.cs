@@ -63,7 +63,7 @@ public partial class MainViewModel : ViewModelBase
         "Console" => _provider.GetRequiredService<ConsoleViewModel>(),
         "Settings" => _provider.GetRequiredService<ServerSettingsViewModel>(),
         "Versions" => _provider.GetRequiredService<VersionsViewModel>(),
-        "Eula" => _provider.GetRequiredService<VersionsViewModel>(),
+        "Eula" => _provider.GetRequiredService<EulaViewModel>(),
         _ => CurrentViewModel
     };
 
