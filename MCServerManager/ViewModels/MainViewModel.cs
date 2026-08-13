@@ -11,7 +11,7 @@ namespace MCServerManager.ViewModels;
 /// <summary>
 /// Main ViewModel for managing the server configuration and runtime
 /// </summary>
-public partial class MainViewModel : ObservableObject
+public partial class MainViewModel : ViewModelBase
 {
     private readonly IServiceProvider _provider;
     private readonly IServerProcessService _processService;
@@ -63,6 +63,7 @@ public partial class MainViewModel : ObservableObject
         "Console" => _provider.GetRequiredService<ConsoleViewModel>(),
         "Settings" => _provider.GetRequiredService<ServerSettingsViewModel>(),
         "Versions" => _provider.GetRequiredService<VersionsViewModel>(),
+        "Eula" => _provider.GetRequiredService<VersionsViewModel>(),
         _ => CurrentViewModel
     };
 
