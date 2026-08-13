@@ -8,6 +8,7 @@
 * Improved version download error handling.
 * Added comments to the ui code (AI).
 * Fixed server not being able to launch after closing the app without shutting down the server.
+* Implemented logging for better troubleshooting.
 
 ## v0.1.0-alpha.6
 
