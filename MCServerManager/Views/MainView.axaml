@@ -19,15 +19,9 @@
 
     <DockPanel Margin="8" HorizontalSpacing="8" LastChildFill="True">
         <!-- Sidebar -->
-        <Grid RowDefinitions="Auto,*,Auto" Background="{DynamicResource SystemRegionColor}">
-            <!-- <StackPanel HorizontalAlignment="Left">
-            <Button Classes="home-button" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <PathIcon Data="{StaticResource home_regular}" Foreground="White" Width="16" Height="16" />
-            </Button>
-            </StackPanel> -->
-
+        <DockPanel DockPanel.Dock="Left">
             <!-- Tab list -->
-            <StackPanel Grid.Row="1" Spacing="4">
+            <StackPanel DockPanel.Dock="Top" Spacing="4">
                 <RadioButton Classes="sidebar-tab" GroupName="Tabs"
                              Content="Dashboard" Command="{Binding SelectTabCommand}" CommandParameter="Dashboard" IsChecked="True" />
                 <!-- <RadioButton Classes="sidebar-tab" GroupName="Tabs"
@@ -41,7 +35,7 @@
             </StackPanel>
 
             <!-- Start | Stop button -->
-            <Button Grid.Row="2" Classes="toggle-start-btn" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+            <Button Classes="toggle-start-btn" VerticalAlignment="Bottom" HorizontalContentAlignment="Center"
                     Command="{Binding ToggleRunningCommand}"
                     Classes.start-btn="{Binding !IsRunning}"
                     Classes.stop-btn="{Binding IsRunning}"
@@ -54,18 +48,13 @@
                     <TextBlock Text="{Binding ToggleButtonText}" VerticalAlignment="Center" />
                 </StackPanel>
             </Button>
-        </Grid>
+        </DockPanel>
 
         <!-- Content area -->
         <ContentControl Content="{Binding CurrentViewModel}" />
     </DockPanel>
 
     <UserControl.Styles>
-        <!-- Home button -->
-        <Style Selector="Button.home-button">
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
-
         <!-- Sidebar buttons -->
         <Style Selector="RadioButton.sidebar-tab">
             <Setter Property="Padding" Value="15,8" />

@@ -13,8 +13,8 @@
 
     <Panel>
         <!-- Main content panel for server settings -->
-        <Grid RowDefinitions="Auto,*" RowSpacing="12" IsVisible="{Binding !ServerSettingsIsEmpty}">
-            <TextBlock Grid.Row="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Settings</TextBlock>
+        <DockPanel VerticalSpacing="8" IsVisible="{Binding !ServerSettingsIsEmpty}">
+            <TextBlock DockPanel.Dock="Top" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Settings</TextBlock>
 
             <Grid Grid.Row="1" RowDefinitions="*,Auto" RowSpacing="8">
                 <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
@@ -38,7 +38,7 @@
 
                 <Button Grid.Row="1" HorizontalAlignment="Right" Command="{Binding SaveSettingsCommand}">Save settings</Button>
             </Grid>
-        </Grid>
+        </DockPanel>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" IsVisible="{Binding ServerSettingsIsEmpty}" Spacing="16">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">

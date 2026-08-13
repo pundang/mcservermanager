@@ -13,12 +13,12 @@
 
     <!-- Main content panel containing version list and loading indicator -->
     <Panel>
-        <Grid RowDefinitions="Auto,*" RowSpacing="16" IsVisible="{Binding ManifestDownloaded}">
-            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
-                <TextBlock Grid.Column="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Versions</TextBlock>
+        <DockPanel VerticalSpacing="8" IsVisible="{Binding ManifestDownloaded}">
+            <DockPanel DockPanel.Dock="Top">
+                <TextBlock DockPanel.Dock="Left" Grid.Column="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Versions</TextBlock>
 
                 <!-- Dropdown menu for filtering versions by type -->
-                <DropDownButton Grid.Column="1" HorizontalAlignment="Right" Content="{Binding VersionChannel}">
+                <DropDownButton HorizontalAlignment="Right" Content="{Binding VersionChannel}">
                     <DropDownButton.Flyout>
                         <MenuFlyout Placement="Bottom">
                             <MenuItem Header="Release" Command="{Binding FilterVersionsByTypeCommand}" CommandParameter="Release"/>
@@ -28,9 +28,9 @@
                         </MenuFlyout>
                     </DropDownButton.Flyout>
                 </DropDownButton>
-            </Grid>
+            </DockPanel>
 
-            <ScrollViewer Grid.Row="1">
+            <ScrollViewer>
                 <ItemsRepeater ItemsSource="{Binding FilteredVersions}">
                     <ItemsRepeater.Layout>
                         <UniformGridLayout MaximumRowsOrColumns="5" MinRowSpacing="18" MinColumnSpacing="12" ItemsJustification="SpaceAround" ItemsStretch="Fill" />
@@ -42,8 +42,9 @@
                     </ItemsRepeater.ItemTemplate>
                 </ItemsRepeater>
             </ScrollViewer>
-        </Grid>
+        </DockPanel>
 
+        <!-- Manifest downloading | download error -->
         <Panel IsVisible="{Binding !ManifestDownloaded}" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock IsVisible="{Binding !ManifestDownloadError}">Downloading version list...</TextBlock>
 

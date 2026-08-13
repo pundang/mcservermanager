@@ -12,31 +12,28 @@
     </Design.DataContext>
 
     <!-- Main content area with dashboard metrics -->
-    <Grid RowDefinitions="Auto,*" RowSpacing="8">
-        <TextBlock Grid.Row="0" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold">Dashboard</TextBlock>
+    <DockPanel VerticalSpacing="8">
+        <TextBlock DockPanel.Dock="Top" FontSize="24" FontWeight="SemiBold">Dashboard</TextBlock>
 
-        <!-- Metric grid layout -->
-        <UniformGrid Grid.Row="1" RowSpacing="8" ColumnSpacing="8">
+        <UniformGrid RowSpacing="8" ColumnSpacing="8">
             <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8" Padding="8">
                 <DockPanel VerticalSpacing="4">
-                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Stretch" FontWeight="UltraLight" LetterSpacing="0.5">Memory</TextBlock>
+                    <TextBlock DockPanel.Dock="Top" FontWeight="UltraLight" LetterSpacing="0.5">Memory</TextBlock>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="4">
                         <TextBlock Text="{Binding RamUsagePercentage, StringFormat={}{0:0}%}" />
                         <TextBlock Text="{Binding RamUsage, StringFormat={}{0:0}MB}" Foreground="Gray" />
                     </StackPanel>
-
                     <controls:Sparkline Points="{Binding RamHistory}" Stroke="#4FC3F7" StrokeThickness="2" Minimum="0" Maximum="100" />
                 </DockPanel>
             </Border>
 
             <Border Background="{DynamicResource ButtonBackgroundPointerOver}" CornerRadius="8" Padding="8">
                 <DockPanel VerticalSpacing="4">
-                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Stretch" FontWeight="UltraLight" LetterSpacing="0.5">CPU</TextBlock>
+                    <TextBlock DockPanel.Dock="Top" FontWeight="UltraLight" LetterSpacing="0.5">CPU</TextBlock>
                     <TextBlock DockPanel.Dock="Top" Text="{Binding CpuUsage, StringFormat={}{0:0}%}" />
-
                     <controls:Sparkline Points="{Binding CpuHistory}" Stroke="#81C784" StrokeThickness="2" Minimum="0" Maximum="100" />
                 </DockPanel>
             </Border>
         </UniformGrid>
-    </Grid>
+    </DockPanel>
 </UserControl>
