@@ -1,5 +1,7 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MCServerManager.Services;
@@ -12,6 +14,9 @@ public partial class DashboardViewModel : ViewModelBase
 
     readonly IStorageManagerService _storageManagerService;
     readonly IServerProcessService _serverProcessService;
+
+    [ObservableProperty]
+    public partial TimeSpan Uptime { get; set; }
 
     [ObservableProperty]
     public partial float CpuUsage { get; set; }
@@ -30,6 +35,7 @@ public partial class DashboardViewModel : ViewModelBase
 
         _serverProcessService.ResourceUsageChanged += (_, usage) =>
         {
+            Uptime = _serverProcessService.Info.Uptime;
             CpuUsage = usage.Cpu;
             RamUsage = usage.Ram;
             RamUsagePercentage = _serverProcessService.MaxMemory > 0
@@ -46,6 +52,15 @@ public partial class DashboardViewModel : ViewModelBase
         history.Add(value);
         if (history.Count > HistoryLength) history.RemoveAt(0);
     }
+
+    [RelayCommand]
+    public async Task StartServer() => await _serverProcessService.StartAsync(_storageManagerService.ServerDirectory);
+
+    [RelayCommand]
+    public async Task RestartServer() => await _serverProcessService.RestartAsync();
+
+    [RelayCommand]
+    public async Task StopServer() => await _serverProcessService.StopAsync();
 
     [RelayCommand]
     public void OpenServerInExplorer() => Process.Start(new ProcessStartInfo

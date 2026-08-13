@@ -10,6 +10,7 @@
 * Fixed server not being able to launch after closing the app without shutting down the server.
 * Implemented logging for better troubleshooting.
 * Added EULA agreement tab.
+* Added server control buttons on the Dashboard tab.
 
 ## v0.1.0-alpha.6
 
