@@ -1,7 +1,7 @@
 <!-- markdownlint-disable-next-line -->
 **⚠️ THIS APP ISN'T FINISHED YET, EXPECT BUGS ⚠️**
 
-# MC Server Manager
+# MCServerManager
 
 Cross-platform application for setting up and managing a Minecraft server.
 
